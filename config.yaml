@@ -20,6 +20,9 @@ menu:
       url: https://github.com/rstudio/blogdown
     - name: Twitter
       url: https://twitter.com/rstudio
+    - name: linkedin
+      url: https://www.linkedin.com/in/mona-jazinaninejad-b69370195/
+      
 params:
   MathJaxCDN: //cdnjs.cloudflare.com/ajax/libs
   MathJaxVersion: 2.7.5
