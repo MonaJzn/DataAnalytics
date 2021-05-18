@@ -19,6 +19,27 @@ library(ggplot2)
 ggplot(starwars, aes(x = height, y = mass)) + geom_point() + labs(title = "Mass vs. height of Starwars characters",
        x = "Height (cm)", y = "Weight (kg)")
 ```
+### Anscombe's Quartet
+We summarize the quartet information by each set of data
+```{r}
+library(Tmisc)
+quartet %>%
+  group_by(set) %>%
+  summarise(
+    mean_x = mean(x), 
+    mean_y = mean(y),
+    sd_x = sd(x),
+    sd_y = sd(y),
+    r = cor(x, y)
+  )
+```
+we visualize all four sets
+```{r quartet-plot, echo = FALSE, out.width = "80%", fig.asp = 0.5}
+ggplot(quartet, aes(x = x, y = y)) + geom_point() + facet_wrap(~ set, ncol = 4)
+```
+
+
+
 
 
 
