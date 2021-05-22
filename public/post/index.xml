@@ -6,7 +6,17 @@
     <description>Recent content in Posts on MonaJzn - Fundamentals of Analytics</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 18 May 2021 00:00:00 +0000</lastBuildDate><atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 22 May 2021 00:00:00 +0000</lastBuildDate><atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Assignment A01: GGPLOT2</title>
+      <link>/2021/05/22/assignment-a01-ggplot2/</link>
+      <pubDate>Sat, 22 May 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/2021/05/22/assignment-a01-ggplot2/</guid>
+      <description>North Carolina births, 100 cases Data Visualization1. Single comparison1.1. baby sex
+## # A tibble: 150 x 9## f_age m_age weeks premature visits gained weight sex_baby smoke ## &amp;lt;int&amp;gt; &amp;lt;int&amp;gt; &amp;lt;int&amp;gt; &amp;lt;fct&amp;gt; &amp;lt;int&amp;gt; &amp;lt;int&amp;gt; &amp;lt;dbl&amp;gt; &amp;lt;fct&amp;gt; &amp;lt;fct&amp;gt; ## 1 31 30 39 full term 13 1 6.88 male smoker ## 2 34 36 39 full term 5 35 7.69 male nonsmoker## 3 36 35 40 full term 12 29 8.</description>
+    </item>
+    
     <item>
       <title>Data and Visualization</title>
       <link>/2021/05/18/data-and-visualization/</link>
