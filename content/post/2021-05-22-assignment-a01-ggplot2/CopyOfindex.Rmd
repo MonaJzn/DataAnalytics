@@ -1,0 +1,83 @@
+---
+title: 'Assignment A01: GGPLOT2'
+author: MonaJzn
+date: '2021-05-22'
+slug: assignment-a01-ggplot2
+categories: []
+tags: []
+---
+## North Carolina births, 100 cases Data Visualization
+
+## 1. Single comparison
+1.1. baby sex
+```{r warning=FALSE, echo=FALSE, message=FALSE}
+library(openintro)
+library(tidyverse)
+library(ggridges)
+
+births
+ggplot(births, aes(x = sex_baby)) +
+      geom_bar(alpha = 0.3, fill = "red") +
+      labs(
+          x = "Baby sex",
+          y = "Count",
+          title = "Sex of Carolina babies")
+```
+1.2. Mother age
+```{r warning=FALSE, echo=FALSE, message=FALSE}
+ggplot(births, aes(x = m_age)) +
+      geom_density(adjust = 0.3) +
+      labs(
+          x = "Mother age",
+          y = "Count",
+          title = "Mother age")
+```
+
+##  2. Multi-lateral comparison
+
+2.1. Premature-smoke
+```{r warning=FALSE, echo=FALSE, message=FALSE}
+ggplot(births, aes(x = premature, fill = smoke)) +
+      geom_bar(alpha = 0.5, position = "dodge") +
+          labs(
+             x = "Premature",
+             y = "Count",
+             title = "Premature relationship with smoke")
+```
+2.2. Weeks-smoke
+```{r warning=FALSE, echo=FALSE, message=FALSE}
+ggplot(births, aes(x = weeks, fill = smoke)) + 
+      geom_bar() +
+      labs(
+           x = "Weeks",
+           y = "Count",
+           title = "Effect of smoke on weeks"
+           ) +
+      facet_wrap(~ smoke, nrow = 2)
+```
+
+
+2.3. Mother age-gained-Premature-sex_baby
+
+```{r warning=FALSE, echo=FALSE, message=FALSE}
+ggplot(births, aes(x = m_age, y = gained, colour = premature,
+          shape = sex_baby)) + 
+       geom_point() +
+       labs(
+            x = "Mother age",
+            y = "Weight gained") +
+       facet_grid(premature ~ sex_baby)
+
+```
+2.4. Weight-sex_baby
+```{r warning=FALSE, echo=FALSE, message=FALSE}
+ggplot(births, aes(x = weight, y = sex_baby, fill = sex_baby, color =             sex_baby)) + 
+       geom_density_ridges(alpha = 0.7)+
+       labs(
+            x = "Baby weight",
+            y = "Baby sex",
+            title = "Baby sex VS Baby weight"
+            )
+
+```
+According to the comparisons, the number male baby births is more than those of female.Number of nonsmoker mothers for premie is more than smoker but we should notice that more percentage of smoker mothers leads to premie compared with nonsmoker mothers. In other words, the probability of premature in case of smoker mother is more than nonsmoker one. Moreover, number of premie in male babies and mothers between 20-25 age is the most.   
