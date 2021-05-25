@@ -1,8 +1,8 @@
 ---
-title: Data Wrangling using Tidyverse
+title: Data Wrangling using Tidyverse1
 author: MonaJzn
 date: '2021-05-25'
-slug: data-wrangling-using-tidyverse
+slug: data-wrangling-using-tidyverse1
 categories:
   - tidyvers
 tags: []
