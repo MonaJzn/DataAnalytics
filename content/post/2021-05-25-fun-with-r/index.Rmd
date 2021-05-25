@@ -6,7 +6,8 @@ slug: fun-with-r
 categories: []
 tags: []
 ---
-##Variables and Numbers
+
+## Variables and Numbers
 ```{r}
 x <- 1
 y = 2
@@ -75,7 +76,7 @@ M1 <- matrix(1:20, ncol = 4)
 M1[c(3,5), c(2,4)]
 
 ```
-##Data Frames
+## Data Frames
 ```{r}
 DF <- data.frame(
 gender = c("Male", "Male","Female"),
