@@ -10,9 +10,11 @@ tags: []
 
 ## Input the Hotels.csv file
 
-```{r warning=FALSe}
+```{r warning=FALSE}
 library(tidyverse)
 hotels <- read_csv("hotels.csv")
+hotels <- read_csv(file.choose())
+
 head(hotels)
 names(hotels)
 
