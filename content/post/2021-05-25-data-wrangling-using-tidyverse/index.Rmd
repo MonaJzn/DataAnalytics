@@ -1,14 +1,15 @@
 ---
-title: Data Wrangling using Tidyverse1
+title: Data Wrangling using Tidyverse
 author: MonaJzn
 date: '2021-05-25'
-slug: data-wrangling-using-tidyverse1
+slug: data-wrangling-using-tidyverse
 categories:
   - tidyvers
 tags: []
 ---
 
 ## Input the Hotels.csv file
+
 ```{r warning=FALSe}
 library(tidyverse)
 hotels <- read_csv("hotels.csv")
@@ -17,6 +18,7 @@ names(hotels)
 
 ```
 ## Select a variable
+
 ```{r}
 select(hotels, hotel, lead_time)
 hotels %>%
@@ -24,6 +26,7 @@ hotels %>%
   arrange(desc(lead_time))
 ```
 ## Select a range of variable
+
 ```{r}
 hotels %>%
   select(hotel:arrival_date_month)
@@ -31,6 +34,7 @@ hotels %>%
   select(starts_with("arrival"))
 ```
 ## Select a range of rows / cases
+
 ```{r}
 hotels %>%
   #We will select 1st, 5th, 8th and 10th row
@@ -52,6 +56,7 @@ hotels %>%
   select(adults, babies, children)
 ```
 ## Summarizing
+
 ```{r}
 hotels %>%
   count(market_segment)
@@ -59,6 +64,7 @@ hotels %>%
   count(hotel, market_segment)
 ```
 ## Mutation
+
 ```{r}
 hotels %>%
   mutate(little_ones = children + babies) %>%
@@ -73,6 +79,7 @@ little_ones %<>%
 ```
 
 ## Summary
+
 ```{r}
 hotels %>%
   group_by(hotel) %>%
@@ -83,4 +90,3 @@ group_by(hotel) %>%
   summarise(mean_adr = mean(adr))
 summary
 ```
-
