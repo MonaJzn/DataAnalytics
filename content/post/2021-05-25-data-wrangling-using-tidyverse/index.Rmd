@@ -92,3 +92,6 @@ group_by(hotel) %>%
   summarise(mean_adr = mean(adr))
 summary
 ```
+
+
+

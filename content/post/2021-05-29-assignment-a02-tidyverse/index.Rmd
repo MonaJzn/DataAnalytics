@@ -1,0 +1,52 @@
+---
+title: 'Assignment A02: TIDYVERSE'
+author: MonaJzn
+date: '2021-05-29'
+slug: assignment-a02-tidyverse
+categories:
+  - tidyvers
+tags: []
+---
+
+## Adidas Vs Nike
+
+```{r warning=FALSE}
+library(tidyverse)
+library(dplyr)
+
+AN <- read_csv("Adidas Vs Nike.csv")
+AN <- read_csv(file.choose())
+head(Products)
+```
+# Sale and discount
+```{r}
+AN %>%
+  group_by(Brand) %>%
+  select("Sale Price", "Discount") %>%
+  arrange(desc(Discount))
+```
+# Total discount
+
+```{r}
+AN %>%
+  group_by(Brand) %>%
+  summarise(Total_discount = sum(Discount))
+ 
+```
+# Group & Count
+```{r}
+AN %>%
+  group_by(Brand) %>%
+  count(Rating >= 4)
+```
+# Pivot
+```{r}
+AN %>%
+  pivot_wider(
+    names_from = Brand,
+    values_from = Discount
+  )
+```
+This data frame has 6 rows: Product Name, Product ID, Listing Price, Sale Price, Discount, Brand, Description, Rating, reviews, and Last Visited. Total number of rating greater than 4 for Adidas is more than Nike based on the reviewers ratings.
+
+ 
