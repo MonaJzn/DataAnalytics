@@ -10,19 +10,19 @@ tags: []
 
 ## Adidas Vs Nike
 
-```{r warning=FALSE}
+```{r}
 library(tidyverse)
 library(dplyr)
 
 AN <- read_csv("Adidas Vs Nike.csv")
 AN <- read_csv(file.choose())
-head(Products)
+head(AN)
+names(AN)
 ```
 # Sale and discount
 ```{r}
 AN %>%
   group_by(Brand) %>%
-  select("Sale Price", "Discount") %>%
   arrange(desc(Discount))
 ```
 # Total discount
