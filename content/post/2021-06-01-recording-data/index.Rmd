@@ -14,7 +14,8 @@ tags: []
 library(readxl)
 rel_inc <- read_excel("relig-income.xlsx")
 
-rel_inc_long <-rel_inc %>%
+
+rel_inc_long <- rel_inc %>%
   rename( 
     religion = `Religious tradition`, 
     n = `Sample Size` 
@@ -25,6 +26,8 @@ rel_inc_long <-rel_inc %>%
     values_to = "proportion" 
   ) %>%
   mutate(frequency = round(proportion * n))
+
+rel_inc_long
 
 ```
 ## Visualize using the Barplot
