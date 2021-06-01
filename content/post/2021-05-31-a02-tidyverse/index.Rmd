@@ -1,0 +1,32 @@
+---
+title: 'Assignment A02: TIDYVERSE'
+author: MonaJzn
+date: '2021-05-31'
+slug: Assignment-a02-tidyverse
+categories:
+  - tidyvers
+tags: []
+---
+## Input the world-happiness-report.csv and world-happiness-report-2021.csv files
+
+```{r}
+library(tidyverse)
+happy <- read_csv("world-happiness-report.csv")
+happy <- read_csv(file.choose())
+happy21 <- read_csv("world-happiness-report-2021.csv")
+happy21 <- read_csv(file.choose())
+
+
+head(happy)
+names(happy)
+
+head(happy21)
+names(happy21)
+```
+
+## one table
+```{r}
+happy21 %>%
+  count(Healthy_life_expectancy > 70, sort = TRUE)
+```
+

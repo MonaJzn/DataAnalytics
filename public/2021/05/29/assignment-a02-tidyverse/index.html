@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Hugo 0.83.1" />
+
+
+<title>Assignment A02: TIDYVERSE - MonaJzn - Fundamentals of Analytics</title>
+<meta property="og:title" content="Assignment A02: TIDYVERSE - MonaJzn - Fundamentals of Analytics">
+
+
+  <link href='/favicon.ico' rel='icon' type='image/x-icon'/>
+
+
+
+  
+
+
+
+
+
+
+
+
+<link href='//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css' rel='stylesheet' type='text/css' />
+
+
+
+<link rel="stylesheet" href="/css/fonts.css" media="all">
+<link rel="stylesheet" href="/css/main.css" media="all">
+
+
+
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header">
+        <nav class="nav">
+  <a href="/" class="nav-logo">
+    <img src="/images/logo.png"
+         width="50"
+         height="50"
+         alt="Logo">
+  </a>
+
+  <ul class="nav-links">
+    
+    <li><a href="https://github.com/MonaJzn/DataAnalytics">About</a></li>
+    
+    <li><a href="https://github.com/rstudio/blogdown">GitHub</a></li>
+    
+    <li><a href="https://www.linkedin.com/in/mona-jazinaninejad-b69370195/">linkedin</a></li>
+    
+    <li><a href="https://twitter.com/rstudio">Twitter</a></li>
+    
+  </ul>
+</nav>
+
+      </header>
+
+
+<main class="content" role="main">
+
+  <article class="article">
+    
+    <span class="article-duration">4 min read</span>
+    
+
+    <h1 class="article-title">Assignment A02: TIDYVERSE</h1>
+
+    
+    <span class="article-date">2021-05-29</span>
+    
+
+    <div class="article-content">
+      
+<script src="/2021/05/29/assignment-a02-tidyverse/index_files/header-attrs/header-attrs.js"></script>
+
+
+<div id="adidas-vs-nike" class="section level2">
+<h2>Adidas Vs Nike</h2>
+<pre class="r"><code>library(tidyverse)</code></pre>
+<pre><code>## -- Attaching packages --------------------------------------- tidyverse 1.3.1 --</code></pre>
+<pre><code>## v ggplot2 3.3.3     v purrr   0.3.4
+## v tibble  3.1.1     v dplyr   1.0.6
+## v tidyr   1.1.3     v stringr 1.4.0
+## v readr   1.4.0     v forcats 0.5.1</code></pre>
+<pre><code>## -- Conflicts ------------------------------------------ tidyverse_conflicts() --
+## x dplyr::filter() masks stats::filter()
+## x dplyr::lag()    masks stats::lag()</code></pre>
+<pre class="r"><code>library(dplyr)
+
+AN &lt;- read_csv(&quot;Adidas Vs Nike.csv&quot;)</code></pre>
+<pre><code>## 
+## -- Column specification --------------------------------------------------------
+## cols(
+##   `Product Name` = col_character(),
+##   `Product ID` = col_character(),
+##   `Listing Price` = col_double(),
+##   `Sale Price` = col_double(),
+##   Discount = col_double(),
+##   Brand = col_character(),
+##   Description = col_character(),
+##   Rating = col_double(),
+##   Reviews = col_double(),
+##   `Last Visited` = col_datetime(format = &quot;&quot;)
+## )</code></pre>
+<pre class="r"><code>AN &lt;- read_csv(file.choose())</code></pre>
+<pre><code>## 
+## -- Column specification --------------------------------------------------------
+## cols(
+##   `Product Name` = col_character(),
+##   `Product ID` = col_character(),
+##   `Listing Price` = col_double(),
+##   `Sale Price` = col_double(),
+##   Discount = col_double(),
+##   Brand = col_character(),
+##   Description = col_character(),
+##   Rating = col_double(),
+##   Reviews = col_double(),
+##   `Last Visited` = col_datetime(format = &quot;&quot;)
+## )</code></pre>
+<pre class="r"><code>head(AN)</code></pre>
+<pre><code>## # A tibble: 6 x 10
+##   `Product Name`      `Product ID` `Listing Price` `Sale Price` Discount Brand  
+##   &lt;chr&gt;               &lt;chr&gt;                  &lt;dbl&gt;        &lt;dbl&gt;    &lt;dbl&gt; &lt;chr&gt;  
+## 1 Women&#39;s adidas Ori~ AH2430                 14999         7499       50 Adidas~
+## 2 Women&#39;s adidas Ori~ G27341                  7599         3799       50 Adidas~
+## 3 Women&#39;s adidas Swi~ CM0081                   999          599       40 Adidas~
+## 4 Women&#39;s adidas Spo~ B44832                  6999         3499       50 Adidas~
+## 5 Women&#39;s adidas Ori~ D98205                  7999         3999       50 Adidas~
+## 6 Women&#39;s adidas Spo~ B75586                  4799         1920       60 Adidas~
+## # ... with 4 more variables: Description &lt;chr&gt;, Rating &lt;dbl&gt;, Reviews &lt;dbl&gt;,
+## #   Last Visited &lt;dttm&gt;</code></pre>
+<pre class="r"><code>names(AN)</code></pre>
+<pre><code>##  [1] &quot;Product Name&quot;  &quot;Product ID&quot;    &quot;Listing Price&quot; &quot;Sale Price&quot;   
+##  [5] &quot;Discount&quot;      &quot;Brand&quot;         &quot;Description&quot;   &quot;Rating&quot;       
+##  [9] &quot;Reviews&quot;       &quot;Last Visited&quot;</code></pre>
+</div>
+<div id="sale-and-discount" class="section level1">
+<h1>Sale and discount</h1>
+<pre class="r"><code>AN %&gt;%
+  group_by(Brand) %&gt;%
+  arrange(desc(Discount))</code></pre>
+<pre><code>## # A tibble: 3,268 x 10
+## # Groups:   Brand [5]
+##    `Product Name`      `Product ID` `Listing Price` `Sale Price` Discount Brand 
+##    &lt;chr&gt;               &lt;chr&gt;                  &lt;dbl&gt;        &lt;dbl&gt;    &lt;dbl&gt; &lt;chr&gt; 
+##  1 Women&#39;s adidas Spo~ B75586                  4799         1920       60 Adida~
+##  2 Men&#39;s adidas Runni~ CI9914                  4999         2000       60 Adida~
+##  3 Women&#39;s adidas ORI~ S82260                 11999         4800       60 Adida~
+##  4 Women&#39;s adidas ORI~ BB2344                  9999         4000       60 Adida~
+##  5 WOMEN&#39;S ADIDAS SPO~ B96563                  6599         2640       60 Adida~
+##  6 WoMen&#39;s adidas TRA~ CP9514                  5999         2400       60 Adida~
+##  7 Men&#39;s adidas RUNNI~ CI1741                  4999         2000       60 Adida~
+##  8 MEN&#39;S ADIDAS ORIGI~ G28940                 18999         7600       60 Adida~
+##  9 Women&#39;s adidas TRA~ BB3293                  4799         1920       60 Adida~
+## 10 Women&#39;s ADIDAS ORI~ BY2976                 10999         4400       60 Adida~
+## # ... with 3,258 more rows, and 4 more variables: Description &lt;chr&gt;,
+## #   Rating &lt;dbl&gt;, Reviews &lt;dbl&gt;, Last Visited &lt;dttm&gt;</code></pre>
+</div>
+<div id="total-discount" class="section level1">
+<h1>Total discount</h1>
+<pre class="r"><code>AN %&gt;%
+  group_by(Brand) %&gt;%
+  summarise(Total_discount = sum(Discount))</code></pre>
+<pre><code>## # A tibble: 5 x 2
+##   Brand                    Total_discount
+##   &lt;chr&gt;                             &lt;dbl&gt;
+## 1 Adidas Adidas ORIGINALS              50
+## 2 Adidas CORE / NEO                 40330
+## 3 Adidas ORIGINALS                  28220
+## 4 Adidas SPORT PERFORMANCE          19230
+## 5 Nike                                  0</code></pre>
+</div>
+<div id="group-count" class="section level1">
+<h1>Group &amp; Count</h1>
+<pre class="r"><code>AN %&gt;%
+  group_by(Brand) %&gt;%
+  count(Rating &gt;= 4)</code></pre>
+<pre><code>## # A tibble: 9 x 3
+## # Groups:   Brand [5]
+##   Brand                    `Rating &gt;= 4`     n
+##   &lt;chr&gt;                    &lt;lgl&gt;         &lt;int&gt;
+## 1 Adidas Adidas ORIGINALS  TRUE              1
+## 2 Adidas CORE / NEO        FALSE           690
+## 3 Adidas CORE / NEO        TRUE            421
+## 4 Adidas ORIGINALS         FALSE           591
+## 5 Adidas ORIGINALS         TRUE            316
+## 6 Adidas SPORT PERFORMANCE FALSE           395
+## 7 Adidas SPORT PERFORMANCE TRUE            211
+## 8 Nike                     FALSE           335
+## 9 Nike                     TRUE            308</code></pre>
+</div>
+<div id="pivot" class="section level1">
+<h1>Pivot</h1>
+<pre class="r"><code>AN %&gt;%
+  pivot_wider(
+    names_from = Brand,
+    values_from = Discount
+  )</code></pre>
+<pre><code>## # A tibble: 3,268 x 13
+##    `Product Name`  `Product ID` `Listing Price` `Sale Price` Description  Rating
+##    &lt;chr&gt;           &lt;chr&gt;                  &lt;dbl&gt;        &lt;dbl&gt; &lt;chr&gt;         &lt;dbl&gt;
+##  1 Women&#39;s adidas~ AH2430                 14999         7499 Channeling ~    4.8
+##  2 Women&#39;s adidas~ G27341                  7599         3799 A modern ta~    3.3
+##  3 Women&#39;s adidas~ CM0081                   999          599 These adida~    2.6
+##  4 Women&#39;s adidas~ B44832                  6999         3499 Inspired by~    4.1
+##  5 Women&#39;s adidas~ D98205                  7999         3999 This design~    3.5
+##  6 Women&#39;s adidas~ B75586                  4799         1920 Refine your~    1  
+##  7 Women&#39;s adidas~ CG4051                  4799         2399 Refine your~    4.4
+##  8 Women&#39;s adidas~ CM0080                   999          599 These adida~    2.8
+##  9 WOMEN&#39;S ADIDAS~ B75990                  5599         2799 These women~    4.5
+## 10 Men&#39;s adidas O~ EE5761                  6599         3959 The Forest ~    4  
+## # ... with 3,258 more rows, and 7 more variables: Reviews &lt;dbl&gt;,
+## #   Last Visited &lt;dttm&gt;, Adidas Adidas ORIGINALS &lt;dbl&gt;, Adidas ORIGINALS &lt;dbl&gt;,
+## #   Adidas CORE / NEO &lt;dbl&gt;, Adidas SPORT PERFORMANCE &lt;dbl&gt;, Nike &lt;dbl&gt;</code></pre>
+<p>This data frame has 6 rows: Product Name, Product ID, Listing Price, Sale Price, Discount, Brand, Description, Rating, reviews, and Last Visited. Total number of rating greater than 4 for Adidas is more than Nike based on the reviewers ratings.</p>
+</div>
+
+    </div>
+  </article>
+
+  
+
+
+</main>
+
+      <footer class="footer">
+        <ul class="footer-links">
+          <li>
+            <a href="/index.xml" type="application/rss+xml" target="_blank">RSS feed</a>
+          </li>
+          <li>
+            <a href="https://gohugo.io/" class="footer-links-kudos">Made with <img src="/images/hugo-logo.png" alt="Img link to Hugo website" width="22" height="22"></a>
+          </li>
+        </ul>
+      </footer>
+
+    </div>
+    
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/r.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+
+
+
+    
+
+    
+  </body>
+</html>
+

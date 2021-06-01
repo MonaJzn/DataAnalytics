@@ -6,7 +6,34 @@
     <description>Recent content in Posts on MonaJzn - Fundamentals of Analytics</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 25 May 2021 00:00:00 +0000</lastBuildDate><atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 01 Jun 2021 00:00:00 +0000</lastBuildDate><atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Data IO</title>
+      <link>/2021/06/01/data-io/</link>
+      <pubDate>Tue, 01 Jun 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/2021/06/01/data-io/</guid>
+      <description>Import Nobel.csv filelibrary(tidyverse)## -- Attaching packages --------------------------------------- tidyverse 1.3.1 --## v ggplot2 3.3.3 v purrr 0.3.4## v tibble 3.1.1 v dplyr 1.0.6## v tidyr 1.1.3 v stringr 1.4.0## v readr 1.4.0 v forcats 0.5.1## -- Conflicts ------------------------------------------ tidyverse_conflicts() --## x dplyr::filter() masks stats::filter()## x dplyr::lag() masks stats::lag()nobel &amp;lt;- read_csv(file = &amp;quot;nobel.csv&amp;quot;)## ## -- Column specification --------------------------------------------------------## cols(## .</description>
+    </item>
+    
+    <item>
+      <title>Assignment A02: TIDYVERSE</title>
+      <link>/2021/05/31/assignment-a02-tidyverse/</link>
+      <pubDate>Mon, 31 May 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/2021/05/31/assignment-a02-tidyverse/</guid>
+      <description>Input the world-happiness-report.csv and world-happiness-report-2021.csv fileslibrary(tidyverse)## -- Attaching packages --------------------------------------- tidyverse 1.3.1 --## v ggplot2 3.3.3 v purrr 0.3.4## v tibble 3.1.1 v dplyr 1.0.6## v tidyr 1.1.3 v stringr 1.4.0## v readr 1.4.0 v forcats 0.5.1## -- Conflicts ------------------------------------------ tidyverse_conflicts() --## x dplyr::filter() masks stats::filter()## x dplyr::lag() masks stats::lag()happy &amp;lt;- read_csv(&amp;quot;world-happiness-report.csv&amp;quot;)## ## -- Column specification --------------------------------------------------------## cols(## Country_name = col_character(),## year = col_double(),## Life_Ladder = col_double(),## Log_GDP_per_capita = col_double(),## Social_support = col_double(),## Healthy_life_expectancy_at_birth = col_double(),## Freedom_to_make_life_choices = col_double(),## Generosity = col_double(),## Perceptions_of_corruption = col_double(),## Positive_affect = col_double(),## Negative_affect = col_double()## )happy &amp;lt;- read_csv(file.</description>
+    </item>
+    
+    <item>
+      <title>Assignment A02: TIDYVERSE</title>
+      <link>/2021/05/29/assignment-a02-tidyverse/</link>
+      <pubDate>Sat, 29 May 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/2021/05/29/assignment-a02-tidyverse/</guid>
+      <description>Adidas Vs Nikelibrary(tidyverse)## -- Attaching packages --------------------------------------- tidyverse 1.3.1 --## v ggplot2 3.3.3 v purrr 0.3.4## v tibble 3.1.1 v dplyr 1.0.6## v tidyr 1.1.3 v stringr 1.4.0## v readr 1.4.0 v forcats 0.5.1## -- Conflicts ------------------------------------------ tidyverse_conflicts() --## x dplyr::filter() masks stats::filter()## x dplyr::lag() masks stats::lag()library(dplyr)AN &amp;lt;- read_csv(&amp;quot;Adidas Vs Nike.csv&amp;quot;)## ## -- Column specification --------------------------------------------------------## cols(## `Product Name` = col_character(),## `Product ID` = col_character(),## `Listing Price` = col_double(),## `Sale Price` = col_double(),## Discount = col_double(),## Brand = col_character(),## Description = col_character(),## Rating = col_double(),## Reviews = col_double(),## `Last Visited` = col_datetime(format = &amp;quot;&amp;quot;)## )AN &amp;lt;- read_csv(file.</description>
+    </item>
+    
     <item>
       <title>Data Wrangling using Tidyverse</title>
       <link>/2021/05/25/data-wrangling-using-tidyverse/</link>
