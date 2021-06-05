@@ -1,14 +1,81 @@
----
-title: A03 Working with Data in the Tidyverse
-author: MonaJzn
-date: '2021-06-04'
-slug: a03-working-with-data-in-the-tidyverse
-categories:
-  - tidyvers
-tags: []
----
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Hugo 0.83.1" />
 
-<script src="{{< blogdown/postref >}}index_files/header-attrs/header-attrs.js"></script>
+
+<title>A03 Working with Data in the Tidyverse - MonaJzn - Fundamentals of Analytics</title>
+<meta property="og:title" content="A03 Working with Data in the Tidyverse - MonaJzn - Fundamentals of Analytics">
+
+
+  <link href='/favicon.ico' rel='icon' type='image/x-icon'/>
+
+
+
+  
+
+
+
+
+
+
+
+
+<link href='//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css' rel='stylesheet' type='text/css' />
+
+
+
+<link rel="stylesheet" href="/css/fonts.css" media="all">
+<link rel="stylesheet" href="/css/main.css" media="all">
+
+
+
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header">
+        <nav class="nav">
+  <a href="/" class="nav-logo">
+    <img src="/images/logo.png"
+         width="50"
+         height="50"
+         alt="Logo">
+  </a>
+
+  <ul class="nav-links">
+    
+    <li><a href="https://github.com/MonaJzn/DataAnalytics">About</a></li>
+    
+    <li><a href="https://github.com/rstudio/blogdown">GitHub</a></li>
+    
+    <li><a href="https://www.linkedin.com/in/mona-jazinaninejad-b69370195/">linkedin</a></li>
+    
+    <li><a href="https://twitter.com/rstudio">Twitter</a></li>
+    
+  </ul>
+</nav>
+
+      </header>
+
+
+<main class="content" role="main">
+
+  <article class="article">
+    
+    <span class="article-duration">7 min read</span>
+    
+
+    <h1 class="article-title">A03 Working with Data in the Tidyverse</h1>
+
+    
+    <span class="article-date">2021-06-04</span>
+    
+
+    <div class="article-content">
+      
+<script src="/2021/06/04/a03-working-with-data-in-the-tidyverse/index_files/header-attrs/header-attrs.js"></script>
 
 
 <div id="import-lego_sales.csv-file" class="section level2">
@@ -132,7 +199,7 @@ tags: []
 ##  9 Role-Play toys        7
 ## 10 Stationery            7
 ## # ... with 17 more rows</code></pre>
-<p>Ultimate is the most common subtheme among the most common theme of lego sets.</p>
+<p>Ultimate, The Force Awakens, and Buildable Figures are the most common subtheme among the most common theme of lego sets.</p>
 </div>
 <div id="create-a-new-variable-called-age_group-and-group-the-ages-into-the-following-categories-18-and-under-19---25-26---35-36---50-51-and-over.-be-sure-to-save-the-updated-data-set-so-you-can-use-the-new-variable-in-other-questions." class="section level2">
 <h2>Create a new variable called age_group and group the ages into the following categories: “18 and under”, “19 - 25”, “26 - 35”, “36 - 50”, “51 and over”. Be sure to save the updated data set so you can use the new variable in other questions.</h2>
@@ -165,33 +232,28 @@ count(age_group == &quot;19 - 25&quot;)/620</code></pre>
 <pre><code>##   age_group == &quot;19 - 25&quot;         n
 ## 1            0.000000000 0.7919355
 ## 2            0.001612903 0.2080645</code></pre>
-<p>Answer: 0.208</p>
+<p>Answer: 20 percent</p>
 </div>
 <div id="is-in-the-19---25-age-group-and-purchased-a-duplo-theme-set" class="section level2">
 <h2>is in the 19 - 25 age group and purchased a Duplo theme set?</h2>
 <pre class="r"><code>lego_age %&gt;%
-count(age_group == &quot;19 - 25&quot; &amp; theme == &quot;Duplo&quot;)/620</code></pre>
-<pre><code>##   age_group == &quot;19 - 25&quot; &amp; theme == &quot;Duplo&quot;          n
-## 1                               0.000000000 0.98548387
-## 2                               0.001612903 0.01451613</code></pre>
-<p>Answer: 0.0145</p>
+count(age_group == &quot;19 - 25&quot;, theme == &quot;Duplo&quot;)/620</code></pre>
+<pre><code>##   age_group == &quot;19 - 25&quot; theme == &quot;Duplo&quot;          n
+## 1            0.000000000      0.000000000 0.75000000
+## 2            0.000000000      0.001612903 0.04193548
+## 3            0.001612903      0.000000000 0.19354839
+## 4            0.001612903      0.001612903 0.01451613</code></pre>
+<p>Answer: 1.4 percent</p>
 </div>
 <div id="is-in-the-19---25-age-group-given-they-purchased-a-duplo-theme-set" class="section level2">
 <h2>is in the 19 - 25 age group given they purchased a Duplo theme set?</h2>
 <pre class="r"><code>lego_age %&gt;%
-  count(theme == &quot;Duplo&quot;) </code></pre>
-<pre><code>## # A tibble: 2 x 2
-##   `theme == &quot;Duplo&quot;`     n
-##   &lt;lgl&gt;              &lt;int&gt;
-## 1 FALSE                585
-## 2 TRUE                  35</code></pre>
-<pre class="r"><code>lego_age %&gt;%
-filter(theme == &quot;Duplo&quot;) %&gt;%
+  filter(theme == &quot;Duplo&quot;) %&gt;%
 count(age_group == &quot;19 - 25&quot;)/35</code></pre>
 <pre><code>##   age_group == &quot;19 - 25&quot;         n
 ## 1             0.00000000 0.7428571
 ## 2             0.02857143 0.2571429</code></pre>
-<p>Answer: 0.257</p>
+<p>Answer: 25 percent</p>
 </div>
 <div id="which-age-group-has-purchased-the-largest-number-of-lego-sets-how-many-did-they-purchase" class="section level2">
 <h2>Which age group has purchased the largest number of lego sets? How many did they purchase?</h2>
@@ -213,33 +275,13 @@ count(age_group == &quot;19 - 25&quot;)/35</code></pre>
 ## 10 John       Ellis         24 815-555-9436  26057 5.01e6 Gear  Video Gam~  2018
 ## # ... with 610 more rows, and 6 more variables: name &lt;chr&gt;, pieces &lt;dbl&gt;,
 ## #   us_price &lt;dbl&gt;, image_url &lt;chr&gt;, quantity &lt;dbl&gt;, age_group &lt;chr&gt;</code></pre>
-<p>Age groups “36 - 50” and “18 and under” purchased the largest number of lego sets, 5005060, and they bought 2 and 1 sets, respectively.</p>
-<p>or</p>
-<pre class="r"><code>lego_age %&gt;%
-  arrange(desc(quantity)) </code></pre>
-<pre><code>## # A tibble: 620 x 15
-##    first_name last_name    age phone_number set_id number theme  subtheme   year
-##    &lt;chr&gt;      &lt;chr&gt;      &lt;dbl&gt; &lt;chr&gt;         &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;  &lt;chr&gt;     &lt;dbl&gt;
-##  1 Sean       Cordova       43 881-555-7280  25004 41565  Mixels Series 8   2018
-##  2 Steven     Washington    16 336-555-1433  25893 30349  City   &lt;NA&gt;       2018
-##  3 Demetri    Do            21 541-555-1433  25620 70588  Ninja~ Rise of ~  2018
-##  4 Joseph     Ross          33 254-555-7628  24794 75135  Star ~ Episode ~  2018
-##  5 Tian       Nelson        38 205-555-7773  25634 70319  Nexo ~ &lt;NA&gt;       2018
-##  6 Holly      Klingelsm~    33 &lt;NA&gt;          25003 41564  Mixels Series 8   2018
-##  7 Carolane   Levosky       37 732-555-0913  25876 853555 Gear   Statione~  2018
-##  8 Aaron      Bruner        18 914-555-5003  24679 60111  City   Fire       2018
-##  9 Orion      Gates         54 214-555-0029  24769 70600  Ninja~ Skybound   2018
-## 10 Daniel     Griffey       68 479-555-3648  24619 41560  Mixels Series 7   2018
-## # ... with 610 more rows, and 6 more variables: name &lt;chr&gt;, pieces &lt;dbl&gt;,
-## #   us_price &lt;dbl&gt;, image_url &lt;chr&gt;, quantity &lt;dbl&gt;, age_group &lt;chr&gt;</code></pre>
-<p>Age groups “36 - 50” ans “18 and under” purchased the largest number of lego sets which is 5.</p>
+<p>Age groups “36 - 50” ans “18 and under” purchased the largest number of lego sets, 5005060, and they bought 2 and 1 sets, respectively.</p>
 </div>
 <div id="which-age-group-has-spent-the-most-money-on-legos-how-much-did-they-spend" class="section level2">
 <h2>Which age group has spent the most money on legos? How much did they spend?</h2>
-<pre class="r"><code>lego_age_spend &lt;- lego_age %&gt;%
+<pre class="r"><code>lego_age %&gt;%
   mutate(spend = us_price * quantity) %&gt;%
-  arrange(desc(spend))
-lego_age_spend</code></pre>
+  arrange(desc(spend))</code></pre>
 <pre><code>## # A tibble: 620 x 16
 ##    first_name last_name    age phone_number set_id number theme  subtheme   year
 ##    &lt;chr&gt;      &lt;chr&gt;      &lt;dbl&gt; &lt;chr&gt;         &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;  &lt;chr&gt;     &lt;dbl&gt;
@@ -258,29 +300,50 @@ lego_age_spend</code></pre>
 ## #   spend &lt;dbl&gt;</code></pre>
 <p>26 - 35 age group has spent the most money on legos, $699.98.</p>
 </div>
-<div id="come-up-with-a-question-you-want-to-answer-using-this-data-and-write-it-down.-then-create-a-data-visualization-that-answers-the-question-and-briefly-explain-how-your-visualization-answers-the-question." class="section level2">
-<h2>Come up with a question you want to answer using this data, and write it down. Then, create a data visualization that answers the question, and briefly explain how your visualization answers the question.</h2>
+<div id="section" class="section level2">
+<h2></h2>
 </div>
-<div id="which-age-group-has-purchased-the-most-pieces-of-lego-sets-and-find-the-related-popular-theme" class="section level2">
-<h2>Which age group has purchased the most pieces of lego sets and find the related popular theme?</h2>
-<pre class="r"><code>  ggplot(lego_age, aes(pieces, age_group)) +
-  geom_col(alpha = 0.8, fill = &quot;red&quot;) +
-  facet_wrap(~ theme)</code></pre>
-<pre><code>## Warning: Removed 69 rows containing missing values (position_stack).</code></pre>
-<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-13-1.png" width="672" />
-Age group 26-35 has purchased the most pieces of lego sets, almost 800 pieces of star wars theme.</p>
-</div>
-<div id="add-one-element-to-the-plot-from-the-previous-exercise-to-change-the-look-of-the-plot-without-changing-the-underlying-data.-for-example-you-can-change-the-theme-background-color-add-annotations-etc.-state-the-change-youre-making-and-display-the-updated-visualization.-we-encourage-you-to-be-creative" class="section level2">
-<h2>Add one element to the plot from the previous exercise to change the look of the plot without changing the underlying data. For example, you can change the theme, background color, add annotations, etc. State the change you’re making and display the updated visualization. We encourage you to be creative!</h2>
-<pre class="r"><code>  ggplot(lego_age, aes(pieces, age_group)) +
-  geom_col(alpha = 0.8, fill = &quot;red&quot;) +
-  facet_wrap(~ theme) +
-  theme_minimal() +
-  labs(
-    x = &quot;Pieces&quot;, y = &quot;Age group&quot;, 
-    title = &quot;Total pieces of each theme purchased by age groups&quot; 
-        )</code></pre>
-<pre><code>## Warning: Removed 69 rows containing missing values (position_stack).</code></pre>
-<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-14-1.png" width="672" />
-I added minimal theme and labels for title, x axis, and y axis.</p>
-</div>
+
+    </div>
+  </article>
+
+  
+
+
+</main>
+
+      <footer class="footer">
+        <ul class="footer-links">
+          <li>
+            <a href="/index.xml" type="application/rss+xml" target="_blank">RSS feed</a>
+          </li>
+          <li>
+            <a href="https://gohugo.io/" class="footer-links-kudos">Made with <img src="/images/hugo-logo.png" alt="Img link to Hugo website" width="22" height="22"></a>
+          </li>
+        </ul>
+      </footer>
+
+    </div>
+    
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/r.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+
+
+
+    
+<script src="/js/math-code.js"></script>
+<script async src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+    
+  </body>
+</html>
+
