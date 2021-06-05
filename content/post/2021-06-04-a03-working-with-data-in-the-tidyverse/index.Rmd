@@ -1,0 +1,90 @@
+---
+title: A03 Working with Data in the Tidyverse
+author: MonaJzn
+date: '2021-06-04'
+slug: a03-working-with-data-in-the-tidyverse
+categories:
+  - tidyvers
+tags: []
+---
+## Import lego_sales.csv file
+```{r}
+library(tidyverse)
+lego <- read_csv(file = "lego_sales.csv")
+lego <- read_csv(file.choose())
+head(lego)
+```
+## What are the three most common first names of customers?
+```{r}
+lego %>%
+  count(first_name, sort = TRUE)
+```
+Jackson, Jacob, and Joseph are the three most common first names.
+
+## What are the three most common themes of lego sets purchased?
+```{r}
+lego %>%
+  count(theme, sort = TRUE)
+```
+Star Wars, Nexo Knights, and Gear are the three most common themes.
+
+## Among the most common theme of lego sets purchased, what is the most common subtheme?
+```{r}
+lego %>%
+  filter(theme == "Star Wars" | theme == "Nexo Knights" | theme == "Gear") %>%
+  count(subtheme, sort = TRUE)
+```
+Ultimate, The Force Awakens, and Buildable Figures are the most common subtheme among the most common theme of lego sets.
+
+## Create a new variable called age_group and group the ages into the following categories: “18 and under”, “19 - 25”, “26 - 35”, “36 - 50”, “51 and over”. Be sure to save the updated data set so you can use the new variable in other questions.
+```{r}
+lego_age <- lego %>%
+  mutate(age_group = case_when(between(age, 1, 18) ~ "18 and under", between(age, 19, 25) ~ "19 - 25", between(age, 26, 35) ~ "26 - 35", between(age, 36, 50) ~ "36 - 50", between(age, 51, 68) ~ "51 and over"))
+lego_age
+```
+## What is the probability a randomly selected customer
+## is in the 19 - 25 age group?
+```{r}
+lego_age %>%
+count(age_group == "19 - 25")/620
+
+```
+Answer: 20 percent
+
+## is in the 19 - 25 age group and purchased a Duplo theme set?
+```{r}
+lego_age %>%
+count(age_group == "19 - 25", theme == "Duplo")/620
+
+```
+Answer: 1.4 percent
+
+## is in the 19 - 25 age group given they purchased a Duplo theme set?
+```{r}
+lego_age %>%
+  filter(theme == "Duplo") %>%
+count(age_group == "19 - 25")/35
+
+```
+Answer: 25 percent
+
+## Which age group has purchased the largest number of lego sets? How many did they purchase?
+
+```{r}
+lego_age %>%
+  mutate(number = parse_number(number)) %>%
+  arrange(desc(number))
+  
+```
+Age groups "36 - 50" ans "18 and under" purchased the largest number of lego sets, 5005060, and they bought 2 and 1 sets, respectively.
+
+## Which age group has spent the most money on legos? How much did they spend?
+```{r}
+lego_age %>%
+  mutate(spend = us_price * quantity) %>%
+  arrange(desc(spend))
+```
+26 - 35 age group has spent the most money on legos, $699.98.
+
+##
+

@@ -1,0 +1,238 @@
+---
+title: A03 Working with Data in the Tidyverse
+author: MonaJzn
+date: '2021-06-04'
+slug: a03-working-with-data-in-the-tidyverse
+categories:
+  - tidyvers
+tags: []
+---
+
+<script src="{{< blogdown/postref >}}index_files/header-attrs/header-attrs.js"></script>
+
+
+<div id="import-lego_sales.csv-file" class="section level2">
+<h2>Import lego_sales.csv file</h2>
+<pre class="r"><code>library(tidyverse)</code></pre>
+<pre><code>## -- Attaching packages --------------------------------------- tidyverse 1.3.1 --</code></pre>
+<pre><code>## v ggplot2 3.3.3     v purrr   0.3.4
+## v tibble  3.1.1     v dplyr   1.0.6
+## v tidyr   1.1.3     v stringr 1.4.0
+## v readr   1.4.0     v forcats 0.5.1</code></pre>
+<pre><code>## -- Conflicts ------------------------------------------ tidyverse_conflicts() --
+## x dplyr::filter() masks stats::filter()
+## x dplyr::lag()    masks stats::lag()</code></pre>
+<pre class="r"><code>lego &lt;- read_csv(file = &quot;lego_sales.csv&quot;)</code></pre>
+<pre><code>## 
+## -- Column specification --------------------------------------------------------
+## cols(
+##   first_name = col_character(),
+##   last_name = col_character(),
+##   age = col_double(),
+##   phone_number = col_character(),
+##   set_id = col_double(),
+##   number = col_character(),
+##   theme = col_character(),
+##   subtheme = col_character(),
+##   year = col_double(),
+##   name = col_character(),
+##   pieces = col_double(),
+##   us_price = col_double(),
+##   image_url = col_character(),
+##   quantity = col_double()
+## )</code></pre>
+<pre class="r"><code>lego &lt;- read_csv(file.choose())</code></pre>
+<pre><code>## 
+## -- Column specification --------------------------------------------------------
+## cols(
+##   first_name = col_character(),
+##   last_name = col_character(),
+##   age = col_double(),
+##   phone_number = col_character(),
+##   set_id = col_double(),
+##   number = col_character(),
+##   theme = col_character(),
+##   subtheme = col_character(),
+##   year = col_double(),
+##   name = col_character(),
+##   pieces = col_double(),
+##   us_price = col_double(),
+##   image_url = col_character(),
+##   quantity = col_double()
+## )</code></pre>
+<pre class="r"><code>head(lego)</code></pre>
+<pre><code>## # A tibble: 6 x 14
+##   first_name last_name   age phone_number set_id number theme    subtheme   year
+##   &lt;chr&gt;      &lt;chr&gt;     &lt;dbl&gt; &lt;chr&gt;         &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;    &lt;chr&gt;     &lt;dbl&gt;
+## 1 Kimberly   Beckstead    24 216-555-2549  24701 76062  DC Comi~ Mighty M~  2018
+## 2 Neel       Garvin       35 819-555-3189  25626 70595  Ninjago  Rise of ~  2018
+## 3 Neel       Garvin       35 819-555-3189  24665 21031  Archite~ &lt;NA&gt;       2018
+## 4 Chelsea    Bouchard     41 &lt;NA&gt;          24695 31048  Creator  &lt;NA&gt;       2018
+## 5 Chelsea    Bouchard     41 &lt;NA&gt;          25626 70595  Ninjago  Rise of ~  2018
+## 6 Chelsea    Bouchard     41 &lt;NA&gt;          24721 10831  Duplo    &lt;NA&gt;       2018
+## # ... with 5 more variables: name &lt;chr&gt;, pieces &lt;dbl&gt;, us_price &lt;dbl&gt;,
+## #   image_url &lt;chr&gt;, quantity &lt;dbl&gt;</code></pre>
+</div>
+<div id="what-are-the-three-most-common-first-names-of-customers" class="section level2">
+<h2>What are the three most common first names of customers?</h2>
+<pre class="r"><code>lego %&gt;%
+  count(first_name, sort = TRUE)</code></pre>
+<pre><code>## # A tibble: 211 x 2
+##    first_name     n
+##    &lt;chr&gt;      &lt;int&gt;
+##  1 Jackson       13
+##  2 Jacob         11
+##  3 Joseph        11
+##  4 Michael       10
+##  5 Audrey         8
+##  6 Connor         8
+##  7 Kaitlyn        8
+##  8 Lucas          8
+##  9 Amanda         7
+## 10 Joshua         7
+## # ... with 201 more rows</code></pre>
+<p>Jackson, Jacob, and Joseph are the three most common first names.</p>
+</div>
+<div id="what-are-the-three-most-common-themes-of-lego-sets-purchased" class="section level2">
+<h2>What are the three most common themes of lego sets purchased?</h2>
+<pre class="r"><code>lego %&gt;%
+  count(theme, sort = TRUE)</code></pre>
+<pre><code>## # A tibble: 25 x 2
+##    theme            n
+##    &lt;chr&gt;        &lt;int&gt;
+##  1 Star Wars       75
+##  2 Nexo Knights    64
+##  3 Gear            55
+##  4 Mixels          55
+##  5 City            45
+##  6 Friends         42
+##  7 Ninjago         38
+##  8 Duplo           35
+##  9 Bionicle        34
+## 10 Creator         25
+## # ... with 15 more rows</code></pre>
+<p>Star Wars, Nexo Knights, and Gear are the three most common themes.</p>
+</div>
+<div id="among-the-most-common-theme-of-lego-sets-purchased-what-is-the-most-common-subtheme" class="section level2">
+<h2>Among the most common theme of lego sets purchased, what is the most common subtheme?</h2>
+<pre class="r"><code>lego %&gt;%
+  filter(theme == &quot;Star Wars&quot; | theme == &quot;Nexo Knights&quot; | theme == &quot;Gear&quot;) %&gt;%
+  count(subtheme, sort = TRUE)</code></pre>
+<pre><code>## # A tibble: 27 x 2
+##    subtheme              n
+##    &lt;chr&gt;             &lt;int&gt;
+##  1 &lt;NA&gt;                 42
+##  2 Ultimate             22
+##  3 The Force Awakens    15
+##  4 Buildable Figures    11
+##  5 Episode V            10
+##  6 MicroFighters        10
+##  7 Battlefront           7
+##  8 Original Content      7
+##  9 Role-Play toys        7
+## 10 Stationery            7
+## # ... with 17 more rows</code></pre>
+<p>Ultimate, The Force Awakens, and Buildable Figures are the most common subtheme among the most common theme of lego sets.</p>
+</div>
+<div id="create-a-new-variable-called-age_group-and-group-the-ages-into-the-following-categories-18-and-under-19---25-26---35-36---50-51-and-over.-be-sure-to-save-the-updated-data-set-so-you-can-use-the-new-variable-in-other-questions." class="section level2">
+<h2>Create a new variable called age_group and group the ages into the following categories: “18 and under”, “19 - 25”, “26 - 35”, “36 - 50”, “51 and over”. Be sure to save the updated data set so you can use the new variable in other questions.</h2>
+<pre class="r"><code>lego_age &lt;- lego %&gt;%
+  mutate(age_group = case_when(between(age, 1, 18) ~ &quot;18 and under&quot;, between(age, 19, 25) ~ &quot;19 - 25&quot;, between(age, 26, 35) ~ &quot;26 - 35&quot;, between(age, 36, 50) ~ &quot;36 - 50&quot;, between(age, 51, 68) ~ &quot;51 and over&quot;))
+lego_age</code></pre>
+<pre><code>## # A tibble: 620 x 15
+##    first_name last_name    age phone_number set_id number theme  subtheme   year
+##    &lt;chr&gt;      &lt;chr&gt;      &lt;dbl&gt; &lt;chr&gt;         &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;  &lt;chr&gt;     &lt;dbl&gt;
+##  1 Kimberly   Beckstead     24 216-555-2549  24701 76062  DC Co~ Mighty M~  2018
+##  2 Neel       Garvin        35 819-555-3189  25626 70595  Ninja~ Rise of ~  2018
+##  3 Neel       Garvin        35 819-555-3189  24665 21031  Archi~ &lt;NA&gt;       2018
+##  4 Chelsea    Bouchard      41 &lt;NA&gt;          24695 31048  Creat~ &lt;NA&gt;       2018
+##  5 Chelsea    Bouchard      41 &lt;NA&gt;          25626 70595  Ninja~ Rise of ~  2018
+##  6 Chelsea    Bouchard      41 &lt;NA&gt;          24721 10831  Duplo  &lt;NA&gt;       2018
+##  7 Bryanna    Welsh         19 &lt;NA&gt;          24797 75138  Star ~ Episode V  2018
+##  8 Bryanna    Welsh         19 &lt;NA&gt;          24701 76062  DC Co~ Mighty M~  2018
+##  9 Caleb      Garcia-Wi~    37 907-555-9236  24730 41115  Frien~ &lt;NA&gt;       2018
+## 10 Caleb      Garcia-Wi~    37 907-555-9236  25611 21127  Minec~ Minifig-~  2018
+## # ... with 610 more rows, and 6 more variables: name &lt;chr&gt;, pieces &lt;dbl&gt;,
+## #   us_price &lt;dbl&gt;, image_url &lt;chr&gt;, quantity &lt;dbl&gt;, age_group &lt;chr&gt;</code></pre>
+</div>
+<div id="what-is-the-probability-a-randomly-selected-customer" class="section level2">
+<h2>What is the probability a randomly selected customer</h2>
+</div>
+<div id="is-in-the-19---25-age-group" class="section level2">
+<h2>is in the 19 - 25 age group?</h2>
+<pre class="r"><code>lego_age %&gt;%
+count(age_group == &quot;19 - 25&quot;)/620</code></pre>
+<pre><code>##   age_group == &quot;19 - 25&quot;         n
+## 1            0.000000000 0.7919355
+## 2            0.001612903 0.2080645</code></pre>
+<p>Answer: 20 percent</p>
+</div>
+<div id="is-in-the-19---25-age-group-and-purchased-a-duplo-theme-set" class="section level2">
+<h2>is in the 19 - 25 age group and purchased a Duplo theme set?</h2>
+<pre class="r"><code>lego_age %&gt;%
+count(age_group == &quot;19 - 25&quot;, theme == &quot;Duplo&quot;)/620</code></pre>
+<pre><code>##   age_group == &quot;19 - 25&quot; theme == &quot;Duplo&quot;          n
+## 1            0.000000000      0.000000000 0.75000000
+## 2            0.000000000      0.001612903 0.04193548
+## 3            0.001612903      0.000000000 0.19354839
+## 4            0.001612903      0.001612903 0.01451613</code></pre>
+<p>Answer: 1.4 percent</p>
+</div>
+<div id="is-in-the-19---25-age-group-given-they-purchased-a-duplo-theme-set" class="section level2">
+<h2>is in the 19 - 25 age group given they purchased a Duplo theme set?</h2>
+<pre class="r"><code>lego_age %&gt;%
+  filter(theme == &quot;Duplo&quot;) %&gt;%
+count(age_group == &quot;19 - 25&quot;)/35</code></pre>
+<pre><code>##   age_group == &quot;19 - 25&quot;         n
+## 1             0.00000000 0.7428571
+## 2             0.02857143 0.2571429</code></pre>
+<p>Answer: 25 percent</p>
+</div>
+<div id="which-age-group-has-purchased-the-largest-number-of-lego-sets-how-many-did-they-purchase" class="section level2">
+<h2>Which age group has purchased the largest number of lego sets? How many did they purchase?</h2>
+<pre class="r"><code>lego_age %&gt;%
+  mutate(number = parse_number(number)) %&gt;%
+  arrange(desc(number))</code></pre>
+<pre><code>## # A tibble: 620 x 15
+##    first_name last_name    age phone_number set_id number theme subtheme    year
+##    &lt;chr&gt;      &lt;chr&gt;      &lt;dbl&gt; &lt;chr&gt;         &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;      &lt;dbl&gt;
+##  1 Tysen      Banda-Cha~    43 &lt;NA&gt;          26059 5.01e6 Gear  Video Gam~  2018
+##  2 Michael    Donner        18 432-555-3069  26059 5.01e6 Gear  Video Gam~  2018
+##  3 Judith     Webb          39 917-555-7417  26058 5.01e6 Gear  Video Gam~  2018
+##  4 Neil       Gabel         30 508-555-5700  26058 5.01e6 Gear  Video Gam~  2018
+##  5 Daianaira  Joseph        26 714-555-9762  26058 5.01e6 Gear  Video Gam~  2018
+##  6 Blake      Serota        44 952-555-3416  26058 5.01e6 Gear  Video Gam~  2018
+##  7 Shelby     Siekmeier     56 210-555-8934  26058 5.01e6 Gear  Video Gam~  2018
+##  8 Joshua     Long          55 469-555-6245  26057 5.01e6 Gear  Video Gam~  2018
+##  9 Tristin    Marcy         39 &lt;NA&gt;          26057 5.01e6 Gear  Video Gam~  2018
+## 10 John       Ellis         24 815-555-9436  26057 5.01e6 Gear  Video Gam~  2018
+## # ... with 610 more rows, and 6 more variables: name &lt;chr&gt;, pieces &lt;dbl&gt;,
+## #   us_price &lt;dbl&gt;, image_url &lt;chr&gt;, quantity &lt;dbl&gt;, age_group &lt;chr&gt;</code></pre>
+<p>Age groups “36 - 50” ans “18 and under” purchased the largest number of lego sets, 5005060, and they bought 2 and 1 sets, respectively.</p>
+</div>
+<div id="which-age-group-has-spent-the-most-money-on-legos-how-much-did-they-spend" class="section level2">
+<h2>Which age group has spent the most money on legos? How much did they spend?</h2>
+<pre class="r"><code>lego_age %&gt;%
+  mutate(spend = us_price * quantity) %&gt;%
+  arrange(desc(spend))</code></pre>
+<pre><code>## # A tibble: 620 x 16
+##    first_name last_name    age phone_number set_id number theme  subtheme   year
+##    &lt;chr&gt;      &lt;chr&gt;      &lt;dbl&gt; &lt;chr&gt;         &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;  &lt;chr&gt;     &lt;dbl&gt;
+##  1 Jennifer   Dana          26 956-555-9719  25597 75827  Ghost~ &lt;NA&gt;       2018
+##  2 Cecilia    Mauro         50 &lt;NA&gt;          25921 75157  Star ~ Rebels     2018
+##  3 Kaitlyn    Degeer        24 316-555-7890  24994 10251  Advan~ Modular ~  2018
+##  4 Elias      Garrett       50 832-555-9165  24915 60130  City   Police     2018
+##  5 Hector     Collins       20 340-555-2508  24627 75098  Star ~ Ultimate~  2018
+##  6 Nerea      Feldman       28 423-555-9631  25921 75157  Star ~ Rebels     2018
+##  7 Carolyn    Quarry        23 567-555-7649  25627 70596  Ninja~ Rise of ~  2018
+##  8 Cody       Gonzales      44 973-555-3236  25922 75149  Star ~ The Forc~  2018
+##  9 Caleb      Garcia-Wi~    37 907-555-9236  25611 21127  Minec~ Minifig-~  2018
+## 10 Melanie    Rollert       43 &lt;NA&gt;          26026 41179  Elves  &lt;NA&gt;       2018
+## # ... with 610 more rows, and 7 more variables: name &lt;chr&gt;, pieces &lt;dbl&gt;,
+## #   us_price &lt;dbl&gt;, image_url &lt;chr&gt;, quantity &lt;dbl&gt;, age_group &lt;chr&gt;,
+## #   spend &lt;dbl&gt;</code></pre>
+<p>26 - 35 age group has spent the most money on legos, $699.98.</p>
+</div>
+<div id="section" class="section level2">
+<h2></h2>
+</div>

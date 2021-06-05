@@ -17,6 +17,15 @@
     </item>
     
     <item>
+      <title>Data Recode</title>
+      <link>/2021/06/01/data-recode/</link>
+      <pubDate>Tue, 01 Jun 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/2021/06/01/data-recode/</guid>
+      <description>Import and transform Relig-incom.csvlibrary(readxl)library(tidyverse)## -- Attaching packages --------------------------------------- tidyverse 1.3.1 --## v ggplot2 3.3.3 v purrr 0.3.4## v tibble 3.1.1 v dplyr 1.0.6## v tidyr 1.1.3 v stringr 1.4.0## v readr 1.4.0 v forcats 0.5.1## -- Conflicts ------------------------------------------ tidyverse_conflicts() --## x dplyr::filter() masks stats::filter()## x dplyr::lag() masks stats::lag()rel_inc &amp;lt;- read_excel(&amp;quot;relig-income.xlsx&amp;quot;)rel_inc &amp;lt;- read_excel(file.choose())rel_inc_long &amp;lt;- rel_inc %&amp;gt;%rename(religion = `Religious tradition`, n = `Sample Size`) %&amp;gt;%pivot_longer(cols = -c(religion, n), # all but religion and n names_to = &amp;quot;income&amp;quot;, values_to = &amp;quot;proportion&amp;quot;) %&amp;gt;%mutate(frequency = round(proportion * n))rel_inc_long## # A tibble: 48 x 5## religion n income proportion frequency## &amp;lt;chr&amp;gt; &amp;lt;dbl&amp;gt; &amp;lt;chr&amp;gt; &amp;lt;dbl&amp;gt; &amp;lt;dbl&amp;gt;## 1 Buddhist 233 Less than $30,000 0.</description>
+    </item>
+    
+    <item>
       <title>Assignment A02: TIDYVERSE</title>
       <link>/2021/05/31/assignment-a02-tidyverse/</link>
       <pubDate>Mon, 31 May 2021 00:00:00 +0000</pubDate>
