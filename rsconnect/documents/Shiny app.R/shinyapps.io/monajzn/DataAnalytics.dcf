@@ -1,0 +1,14 @@
+name: DataAnalytics
+title: DataAnalytics
+username:
+account: monajzn
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 4245791
+bundleId: 4694322
+url: https://monajzn.shinyapps.io/DataAnalytics/
+when: 1623195835.02516
+lastSyncTime: 1623195835.02516
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: .RData|.Rprofile|config.yaml|index.Rmd|layouts/shortcodes/blogdown/postref.html|netlify.toml|R/build.R|R/build2.R|content|public|static|themes

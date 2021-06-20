@@ -6,22 +6,31 @@
     <description>Recent content in Categories on MonaJzn - Fundamentals of Analytics</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 04 Jun 2021 00:00:00 +0000</lastBuildDate><atom:link href="/categories/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 16 Jun 2021 00:00:00 +0000</lastBuildDate><atom:link href="/categories/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>tidyvers</title>
-      <link>/categories/tidyvers/</link>
-      <pubDate>Fri, 04 Jun 2021 00:00:00 +0000</pubDate>
+      <title>ggplot2</title>
+      <link>/categories/ggplot2/</link>
+      <pubDate>Wed, 16 Jun 2021 00:00:00 +0000</pubDate>
       
-      <guid>/categories/tidyvers/</guid>
+      <guid>/categories/ggplot2/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>ggplot2</title>
-      <link>/categories/ggplot2/</link>
-      <pubDate>Tue, 18 May 2021 00:00:00 +0000</pubDate>
+      <title>shiny</title>
+      <link>/categories/shiny/</link>
+      <pubDate>Wed, 16 Jun 2021 00:00:00 +0000</pubDate>
       
-      <guid>/categories/ggplot2/</guid>
+      <guid>/categories/shiny/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>tidyvers</title>
+      <link>/categories/tidyvers/</link>
+      <pubDate>Wed, 16 Jun 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/categories/tidyvers/</guid>
       <description></description>
     </item>
     

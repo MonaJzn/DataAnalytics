@@ -1,0 +1,14 @@
+name: ShinyAssignment
+title: ShinyAssignment
+username:
+account: monajzn
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 4274429
+bundleId: 4724624
+url: https://monajzn.shinyapps.io/ShinyAssignment/
+when: 1623873435.51236
+lastSyncTime: 1623873435.51236
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: .RData|.Rprofile|AH_Cumulative_Provisional_COVID-19_Death.csv|config.yaml|covid-speeches-words.rds|Covid19.R|index.Rmd|layouts/shortcodes/blogdown/postref.html|netlify.toml|R/build.R|R/build2.R|Shiny app.R|Shiny Assignment1.R|content|public|static|themes

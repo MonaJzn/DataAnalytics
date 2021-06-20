@@ -40,13 +40,15 @@ Ultimate is the most common subtheme among the most common theme of lego sets.
 ```{r}
 lego_age <- lego %>%
   mutate(age_group = case_when(between(age, 1, 18) ~ "18 and under", between(age, 19, 25) ~ "19 - 25", between(age, 26, 35) ~ "26 - 35", between(age, 36, 50) ~ "36 - 50", between(age, 51, 68) ~ "51 and over"))
-lego_age
+age <- lego_age %>%
+  select(first_name, last_name, age_group)
+age
 ```
 ## What is the probability a randomly selected customer
 ## is in the 19 - 25 age group?
 ```{r}
 lego_age %>%
-count(age_group == "19 - 25")/620
+count(age_group == "19 - 25")/nrow(lego_age)
 
 ```
 Answer: 0.208
@@ -54,20 +56,20 @@ Answer: 0.208
 ## is in the 19 - 25 age group and purchased a Duplo theme set?
 ```{r}
 lego_age %>%
-count(age_group == "19 - 25" & theme == "Duplo")/620
+count(age_group == "19 - 25" & theme == "Duplo")/nrow(lego_age)
 
 ```
 Answer: 0.0145
 
 ## is in the 19 - 25 age group given they purchased a Duplo theme set?
 ```{r}
-lego_age %>%
-  count(theme == "Duplo") 
+lego_age_d <- lego_age %>%
+  filter(theme == "Duplo") 
 ```
 ```{r}
 lego_age %>%
 filter(theme == "Duplo") %>%
-count(age_group == "19 - 25")/35
+count(age_group == "19 - 25")/nrow(lego_age_d)
 
 ```
 
@@ -77,19 +79,13 @@ Answer: 0.257
 ## Which age group has purchased the largest number of lego sets? How many did they purchase?
 
 ```{r}
-lego_age %>%
-  mutate(number = parse_number(number)) %>%
-  arrange(desc(number))
-  
-```
-Age groups "36 - 50" and "18 and under" purchased the largest number of lego sets, 5005060, and they bought 2 and 1 sets, respectively.
+lego_age_q <- lego_age %>%
+  group_by(age_group) %>%
+ summarize(s = sum(quantity))
 
-or 
-```{r}
-lego_age %>%
-  arrange(desc(quantity)) 
+lego_age_q
 ```
-Age groups "36 - 50" ans "18 and under" purchased the largest number of lego sets which is 5.
+Age group "36 - 50" has purchased the largest number of lego sets which is 313.
 
 ## Which age group has spent the most money on legos? How much did they spend?
 ```{r}
@@ -102,26 +98,32 @@ lego_age_spend
 
 ## Come up with a question you want to answer using this data, and write it down. Then, create a data visualization that answers the question, and briefly explain how your visualization answers the question.
 
-## Which age group has purchased the most pieces of lego sets and find the related popular theme?
+## Which age group has spend the most on Star Wars theme?
 ```{r}
-  ggplot(lego_age, aes(pieces, age_group)) +
-  geom_col(alpha = 0.8, fill = "red") +
-  facet_wrap(~ theme)
+
+lego_age_s <- lego_age_spend %>%
+  filter(theme == "Star Wars")
+
+  ggplot(lego_age_s, aes(age_group, spend)) +
+  geom_col(fill = "red")
+   
 ```
-Age group 26-35 has purchased the most pieces of lego sets, almost 800 pieces of star wars theme.
+Age group 26-35 has purchased the most pieces of lego sets, almost 8000 pieces of star wars theme.
 
 
 ## Add one element to the plot from the previous exercise to change the look of the plot without changing the underlying data. For example, you can change the theme, background color, add annotations, etc. State the change you’re making and display the updated visualization. We encourage you to be creative!
 
 
 ```{r}
-  ggplot(lego_age, aes(pieces, age_group)) +
-  geom_col(alpha = 0.8, fill = "red") +
-  facet_wrap(~ theme) +
+  lego_age_s <- lego_age_spend %>%
+  filter(theme == "Star Wars")
+
+  ggplot(lego_age_s, aes(age_group, spend)) +
+  geom_col(alpha = 0.6, fill = "green") +
   theme_minimal() +
   labs(
-    x = "Pieces", y = "Age group", 
-    title = "Total pieces of each theme purchased by age groups" 
+    x = "Age group", y = "Spend", 
+    title = "Total puchase amount of starwars theme purchased by each age group" 
         )
 ```
 I added minimal theme and labels for title, x axis, and y axis.

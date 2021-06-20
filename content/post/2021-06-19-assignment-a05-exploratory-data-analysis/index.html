@@ -1,0 +1,171 @@
+---
+title: 'Assignment A05: Exploratory Data Analysis'
+author: MonaJzn
+date: '2021-06-19'
+slug: assignment-a05-exploratory-data-analysis
+categories:
+  - tidyvers
+  - ggplot2
+tags: []
+---
+
+<script src="{{< blogdown/postref >}}index_files/header-attrs/header-attrs.js"></script>
+
+
+<div id="import-agriculture-and-rural-development.csv-file" class="section level2">
+<h2>Import agriculture-and-rural-development.csv file</h2>
+<p>Please fin the data file href = “<a href="https://github.com/ZeningQu/World-Bank-Data-by-Indicators" class="uri">https://github.com/ZeningQu/World-Bank-Data-by-Indicators</a>”</p>
+<pre><code>## # A tibble: 6 x 47
+##   country_name country_code  year access_to_electricity~ agricultural_irrigated~
+##   &lt;chr&gt;        &lt;chr&gt;        &lt;dbl&gt;                  &lt;dbl&gt;                   &lt;dbl&gt;
+## 1 Albania      ALB           1977                   NA                      NA  
+## 2 Azerbaijan   AZE           2013                  100                      29.7
+## 3 Azerbaijan   AZE           2015                  100                      30.0
+## 4 Burkina Faso BFA           1993                    0.6                    NA  
+## 5 Bulgaria     BGR           1989                   NA                      NA  
+## 6 Belarus      BLR           1963                   NA                      NA  
+## # ... with 42 more variables: agricultural_land_percent_of_land_area &lt;dbl&gt;,
+## #   agricultural_land_sq_km &lt;dbl&gt;, agricultural_machinery_tractors &lt;dbl&gt;,
+## #   agricultural_machinery_tractors_per_100_sq_km_of_arable_land &lt;dbl&gt;,
+## #   agricultural_methane_emissions_percent_of_total &lt;dbl&gt;,
+## #   agricultural_methane_emissions_thousand_metric_tons_of_co2_equivalent &lt;dbl&gt;,
+## #   agricultural_nitrous_oxide_emissions_percent_of_total &lt;dbl&gt;,
+## #   agricultural_nitrous_oxide_emissions_thousand_metric_tons_of_co2_equivalent &lt;dbl&gt;,
+## #   agricultural_raw_materials_exports_percent_of_merchandise_exports &lt;dbl&gt;,
+## #   agricultural_raw_materials_imports_percent_of_merchandise_imports &lt;dbl&gt;,
+## #   agriculture_forestry_and_fishing_value_added_percent_of_gdp &lt;dbl&gt;,
+## #   agriculture_forestry_and_fishing_value_added_current_us &lt;chr&gt;,
+## #   annual_freshwater_withdrawals_agriculture_percent_of_total_freshwater_withdrawal &lt;dbl&gt;,
+## #   arable_land_percent_of_land_area &lt;dbl&gt;,
+## #   arable_land_hectares_per_person &lt;dbl&gt;, arable_land_hectares &lt;dbl&gt;,
+## #   average_precipitation_in_depth_mm_per_year &lt;dbl&gt;,
+## #   cereal_production_metric_tons &lt;dbl&gt;, cereal_yield_kg_per_hectare &lt;dbl&gt;,
+## #   crop_production_index_2004_2006_100 &lt;dbl&gt;,
+## #   employment_in_agriculture_percent_of_total_employment_modeled_ilo_estimate &lt;dbl&gt;,
+## #   employment_in_agriculture_female_percent_of_female_employment_modeled_ilo_estimate &lt;dbl&gt;,
+## #   employment_in_agriculture_male_percent_of_male_employment_modeled_ilo_estimate &lt;dbl&gt;,
+## #   fertilizer_consumption_percent_of_fertilizer_production &lt;dbl&gt;,
+## #   fertilizer_consumption_kilograms_per_hectare_of_arable_land &lt;dbl&gt;,
+## #   food_production_index_2004_2006_100 &lt;dbl&gt;,
+## #   forest_area_percent_of_land_area &lt;dbl&gt;, forest_area_sq_km &lt;dbl&gt;,
+## #   land_area_sq_km &lt;dbl&gt;, land_under_cereal_production_hectares &lt;dbl&gt;,
+## #   livestock_production_index_2004_2006_100 &lt;dbl&gt;,
+## #   permanent_cropland_percent_of_land_area &lt;dbl&gt;, rural_land_area_sq_km &lt;dbl&gt;,
+## #   rural_land_area_where_elevation_is_below_5_meters_percent_of_total_land_area &lt;dbl&gt;,
+## #   rural_land_area_where_elevation_is_below_5_meters_sq_km &lt;dbl&gt;,
+## #   rural_population &lt;dbl&gt;, rural_population_percent_of_total_population &lt;dbl&gt;,
+## #   rural_population_growth_annual_percent &lt;dbl&gt;,
+## #   rural_population_living_in_areas_where_elevation_is_below_5_meters_percent_of_total_population &lt;dbl&gt;,
+## #   rural_poverty_gap_at_national_poverty_lines_percent &lt;dbl&gt;,
+## #   rural_poverty_headcount_ratio_at_national_poverty_lines_percent_of_rural_population &lt;dbl&gt;,
+## #   surface_area_sq_km &lt;dbl&gt;</code></pre>
+<pre><code>## # A tibble: 15,252 x 47
+##    country_name     country_code  year access_to_electrici~ agricultural_irriga~
+##    &lt;chr&gt;            &lt;chr&gt;        &lt;dbl&gt;                &lt;dbl&gt;                &lt;dbl&gt;
+##  1 Chile            CHL           1960                   NA                   NA
+##  2 East Asia &amp; Pac~ EAP           1960                   NA                   NA
+##  3 Lebanon          LBN           1960                   NA                   NA
+##  4 Israel           ISR           1960                   NA                   NA
+##  5 St. Vincent and~ VCT           1960                   NA                   NA
+##  6 Ireland          IRL           1960                   NA                   NA
+##  7 Uruguay          URY           1960                   NA                   NA
+##  8 Panama           PAN           1960                   NA                   NA
+##  9 Maldives         MDV           1960                   NA                   NA
+## 10 American Samoa   ASM           1960                   NA                   NA
+## # ... with 15,242 more rows, and 42 more variables:
+## #   agricultural_land_percent_of_land_area &lt;dbl&gt;,
+## #   agricultural_land_sq_km &lt;dbl&gt;, agricultural_machinery_tractors &lt;dbl&gt;,
+## #   agricultural_machinery_tractors_per_100_sq_km_of_arable_land &lt;dbl&gt;,
+## #   agricultural_methane_emissions_percent_of_total &lt;dbl&gt;,
+## #   agricultural_methane_emissions_thousand_metric_tons_of_co2_equivalent &lt;dbl&gt;,
+## #   agricultural_nitrous_oxide_emissions_percent_of_total &lt;dbl&gt;,
+## #   agricultural_nitrous_oxide_emissions_thousand_metric_tons_of_co2_equivalent &lt;dbl&gt;,
+## #   agricultural_raw_materials_exports_percent_of_merchandise_exports &lt;dbl&gt;,
+## #   agricultural_raw_materials_imports_percent_of_merchandise_imports &lt;dbl&gt;,
+## #   agriculture_forestry_and_fishing_value_added_percent_of_gdp &lt;dbl&gt;,
+## #   agriculture_forestry_and_fishing_value_added_current_us &lt;chr&gt;,
+## #   annual_freshwater_withdrawals_agriculture_percent_of_total_freshwater_withdrawal &lt;dbl&gt;,
+## #   arable_land_percent_of_land_area &lt;dbl&gt;,
+## #   arable_land_hectares_per_person &lt;dbl&gt;, arable_land_hectares &lt;dbl&gt;,
+## #   average_precipitation_in_depth_mm_per_year &lt;dbl&gt;,
+## #   cereal_production_metric_tons &lt;dbl&gt;, cereal_yield_kg_per_hectare &lt;dbl&gt;,
+## #   crop_production_index_2004_2006_100 &lt;dbl&gt;,
+## #   employment_in_agriculture_percent_of_total_employment_modeled_ilo_estimate &lt;dbl&gt;,
+## #   employment_in_agriculture_female_percent_of_female_employment_modeled_ilo_estimate &lt;dbl&gt;,
+## #   employment_in_agriculture_male_percent_of_male_employment_modeled_ilo_estimate &lt;dbl&gt;,
+## #   fertilizer_consumption_percent_of_fertilizer_production &lt;dbl&gt;,
+## #   fertilizer_consumption_kilograms_per_hectare_of_arable_land &lt;dbl&gt;,
+## #   food_production_index_2004_2006_100 &lt;dbl&gt;,
+## #   forest_area_percent_of_land_area &lt;dbl&gt;, forest_area_sq_km &lt;dbl&gt;,
+## #   land_area_sq_km &lt;dbl&gt;, land_under_cereal_production_hectares &lt;dbl&gt;,
+## #   livestock_production_index_2004_2006_100 &lt;dbl&gt;,
+## #   permanent_cropland_percent_of_land_area &lt;dbl&gt;, rural_land_area_sq_km &lt;dbl&gt;,
+## #   rural_land_area_where_elevation_is_below_5_meters_percent_of_total_land_area &lt;dbl&gt;,
+## #   rural_land_area_where_elevation_is_below_5_meters_sq_km &lt;dbl&gt;,
+## #   rural_population &lt;dbl&gt;, rural_population_percent_of_total_population &lt;dbl&gt;,
+## #   rural_population_growth_annual_percent &lt;dbl&gt;,
+## #   rural_population_living_in_areas_where_elevation_is_below_5_meters_percent_of_total_population &lt;dbl&gt;,
+## #   rural_poverty_gap_at_national_poverty_lines_percent &lt;dbl&gt;,
+## #   rural_poverty_headcount_ratio_at_national_poverty_lines_percent_of_rural_population &lt;dbl&gt;,
+## #   surface_area_sq_km &lt;dbl&gt;</code></pre>
+</div>
+<div id="data-explanation-sustainability-deveopment-in-canadas-agriculture-sector" class="section level2">
+<h2>Data explanation: Sustainability deveopment in Canada’s agriculture sector</h2>
+<p>Sustainability development has attracted much attention in recent years. To implement sustainability, supply chain players should meet environmental and social concerns and also minimize costs. In this data exploratory, we want to investigate the sustainability pillars in agricultural sector in Canada.</p>
+</div>
+<div id="questions" class="section level2">
+<h2>Questions</h2>
+<ol style="list-style-type: decimal">
+<li>What are the environmental factors in the data set?</li>
+<li>Do the environmental pillar contribute to the sustainability?</li>
+<li>What is the role of fertilizer in environmental sustainability in Canada’s agriculture?</li>
+<li>What is the effect of arable land area on sustainability?</li>
+<li>What is the nitrous oxide emissions amount in rcent years and it’s relationship with fertilizer?</li>
+<li>What is the impact of methane emissions percent of total on sutainable development?</li>
+<li>How yearly employment in agriculture percent of total employment could affect social pillar?</li>
+<li>Does yearly agricultural machinery tractors per 100_sq_km_of arable land affect employment?</li>
+<li>Is there any relationship between rural population growth and employment rate?</li>
+<li>How agriculture_forestry_and_fishing_value_added_percent_of_gdp contributes to the economic pilar?</li>
+<li>How early agricultural raw materials exports percent of merchandise exports contributes to the economic pilar?</li>
+<li>How early agricultural raw materials imports percent of merchandise imports contributes to the economic pilar?</li>
+</ol>
+</div>
+<div id="environmental-pillar" class="section level2">
+<h2>Environmental pillar</h2>
+<p>In this part, environmental aspect of sustainability is explored by plotting arable land percentage, fertilizer consumption, agricultural methane emissions percent, and agricultural nitrous oxide emissions. These are the most related environmental pillars in this data set that highly affects the sustainability development in agriculture sector. In the following, the analysis of each plot is provided.</p>
+<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-2-1.png" width="672" />
+First of all, only have the data for 2002-2015. Sustainability concept is produced in 1987 for the first time. Therefore, it was better to compare the last decade to the previous ones to find the growth of indicators. As shown in Fig. 1, during the last decade, fertilizer consumption hes been increasing. This is not in line with the sustainability development goals. However, it’s possible that this enhancement is the cause of more agri-food production in arable lands to meet the need of growing population. Therefore, we should investigate arable land percent of land area.</p>
+<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-3-1.png" width="672" />
+As indicated in Fig. 2, in the most recent years of available date, arable_land_percent_of_land_area is decreasing while fertilizer utilization is increasing. This means that agri-businesses are using more fertilizer in a less arable area in recent years. Agriculural supply chains should find a better solution for producing more food rather than enhancing the utilization of fertilizers. Accordingly, there is a need to investigate the agricultural nitrous oxide emissions which is the result of fertilizer use in agriculture sector.</p>
+<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-4-1.png" width="672" />
+First about data, nitrous oxide emissions date is more based on the 1970-2010. we can see three outlier data relating to 1970, 1980, and 1990. But we can see the increasing trend in nitrous oxide emissions. This increase is the result of fertilizer consumption. Therefore, now we are sure that the agricultural actors should find a solution for this emission and its effects on the climate change and sustainability.
+<img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-5-1.png" width="672" />
+First of all, metane emissions date is more based on the 1970-2010. It was better to have more updated data. We can also find three outliers data relating to 1970, 1980, and 1990. The food system is one of the largest emitters of methane. Therefore, methane emission investigation is of high importance. In recent years of date set, 2000-2010, the methane emission trend is almost increasing. However, from 1975 to 1995, we see the decreaing trend. Therefore, it has not a steady trend but the last decade is more important to our analysis that shows the enhancing trend. All in all, agricultural supply chain players should pay more attention to environmental pillar of sustainability.</p>
+</div>
+<div id="social-pillar" class="section level2">
+<h2>Social pillar</h2>
+<p>In this section, the social indicators of sustainability addressed in the data set of agriculture are explored.</p>
+<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-6-1.png" width="672" />
+Fig. 5 indicates employment_in_agriculture_percent_of_total_employment for available years. Unfortunately, we have only the data from 1990. As shown, the employment of agricultural sector compared to total employment in Canada is decreasing. Employment rate and job creating is the most important social indicator in all sectors. However, we could investigate other probable influential parameters on employment rat. For instance, mechanization of agriculture products could be a reason.</p>
+<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<pre><code>## List of 1
+##  $ legend.position: chr &quot;no&quot;
+##  - attr(*, &quot;class&quot;)= chr [1:2] &quot;theme&quot; &quot;gg&quot;
+##  - attr(*, &quot;complete&quot;)= logi FALSE
+##  - attr(*, &quot;validate&quot;)= logi TRUE</code></pre>
+<p>In the dataset, we have the agricultural machinery tractors information from 1960-2011. Note that the amount for 1970, 1980, and 1990 are not reliable. According to Fig. 6, the increase in agricultural machinery tractors during 1990-2011 is not enough significant to supports the lower rate of employment in agriculture sector in Canada. Therefore, we could explore other social indicators according to the available data.</p>
+<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-8-1.png" width="672" />
+The question is if the population of rural area is decreasing then we can conclude that decreasing employment rate would be the result of that. Therefore, to answer this question, Fig. 7 is plotted. As shown, between 1990-2016, we see an uneven trend in rural population growth. Although generally the population growth of rural area decreased from 1980, we cannot find a significant relationship between employment rate and population growth rate. May be there are other effective factors that we have not in this data set. All in all, employment rate, which is one of the most important factors of sustainability in other sectors, has not any contribution to the sustainable development of agriculture in Canada, specifically in the duration of existing data.</p>
+</div>
+<div id="economic-pillar" class="section level2">
+<h2>Economic pillar</h2>
+<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-9-1.png" width="672" />
+Increasing the profitability of agriculture supply chains or decreasing the costs of chains is the goal of economical aspect of sustainability development.However, we do not have straight-forward data that directly investigate the profit or cost.Fig. 8 plots the agriculture forestry and fishing value added percent of gdp in Canada. As shown, we only have the data of 2007 to 2014. Moreover, there is no significant increasing or decreasing trend in that.</p>
+<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-11-1.png" width="672" />
+Other related data to the economical aspect of sustainability in the data set are export and import percentage of total merchandise in Canada. Figs. 9 and 10 show that there is a decreasing trend in agricultural raw materials export and import. In both figures, we can see the outlier data in 1970, 1980, and 1990. Fig. 9 show that exports amount is more than import amount by comparing import and export amounts year by year. Therefore, we conclude that agriculture in Canada is economically profitable that supports the economic pilar of sustainability.</p>
+</div>
+<div id="summary" class="section level2">
+<h2>Summary</h2>
+<p>The data set provides the information of agriculture sector and we aimed to investigate the sustainability development factors in the Canada for the available years. Some part of data lacks sufficient data especially for the early years of study. Other have outlier data for some of years. All in all, we conclude that agricultural sector in Canada should pay more attention to the environmental and social aspect of sustainability. The economic pilar works well and it seems to be profitable.</p>
+</div>

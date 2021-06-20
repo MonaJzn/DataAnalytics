@@ -6,7 +6,28 @@
     <description>Recent content in Posts on MonaJzn - Fundamentals of Analytics</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 04 Jun 2021 00:00:00 +0000</lastBuildDate><atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 16 Jun 2021 00:00:00 +0000</lastBuildDate><atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Assignmnet A04: Shiny App</title>
+      <link>/2021/06/16/assignmnet-a04-shiny-app/</link>
+      <pubDate>Wed, 16 Jun 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/2021/06/16/assignmnet-a04-shiny-app/</guid>
+      <description>Covid analysisThis work provides some comparion of number of covid death based on state, age group, and place of death of the 02/01/2020 and 07/23/2020 as of 07/23/2020. Please find the data visualization on the following shiny app.
+In the Covid death tab, you first choose the state, and then the plot will show the number of all death involving Covid-19 based on different age gruops.The age groups are 0-14, 15-44, 45-64, 65-74, 75-84, 85 years and over, and all ages.</description>
+    </item>
+    
+    <item>
+      <title>Fitting and Interpretting Models</title>
+      <link>/2021/06/15/fitting-and-interpretting-models/</link>
+      <pubDate>Tue, 15 Jun 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/2021/06/15/fitting-and-interpretting-models/</guid>
+      <description>Important librariesclass: middle
+Import Data: Paris paintingspp &amp;lt;- read_csv(&amp;quot;paris-paintings.csv&amp;quot;, na = c(&amp;quot;n/a&amp;quot;, &amp;quot;&amp;quot;, &amp;quot;NA&amp;quot;))pp &amp;lt;- read_csv(file.choose())Number of observations: 3393Number of variables: 61Goal: Predict height from width\[\widehat{height}_{i} = \beta_0 + \beta_1 \times width_{i}\]
+## `geom_smooth()` using formula &amp;#39;y ~ x&amp;#39;Step 1: Specify modellinear_reg()## Linear Regression Model Specification (regression)## Step 2: Set model fitting enginer linear_reg() %&amp;gt;% set_engine(&#34;</description>
+    </item>
+    
     <item>
       <title>A03 Working with Data in the Tidyverse</title>
       <link>/2021/06/04/a03-working-with-data-in-the-tidyverse/</link>

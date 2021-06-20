@@ -87,3 +87,4 @@ ggplot(rel_inc_long, aes(y = religion, x = frequency, fill = income)) +
     )
 ```
 
+
