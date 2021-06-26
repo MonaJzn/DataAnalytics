@@ -6,7 +6,28 @@
     <description>Recent content in Posts on MonaJzn - Fundamentals of Analytics</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 16 Jun 2021 00:00:00 +0000</lastBuildDate><atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 22 Jun 2021 00:00:00 +0000</lastBuildDate><atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Final project: Climate change</title>
+      <link>/2021/06/22/final-project-climate-change/</link>
+      <pubDate>Tue, 22 Jun 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/2021/06/22/final-project-climate-change/</guid>
+      <description>Import climate-change.csv filePlease find the data file href = “https://github.com/ZeningQu/World-Bank-Data-by-Indicators”
+Data explanation: Climate change in USDue to the importance of This data set includes climate change information for countries throughout the world from 1960-2016. Climate change data provides information about green house gas(GHG) emissions, land areas, population, and renewable energy.In this project, I am going to explore climate change indicators in the US from 1960-2016. In some indicators, we may have information for shorter time horizon.</description>
+    </item>
+    
+    <item>
+      <title>Assignment A05: Exploratory Data Analysis</title>
+      <link>/2021/06/19/assignment-a05-exploratory-data-analysis/</link>
+      <pubDate>Sat, 19 Jun 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/2021/06/19/assignment-a05-exploratory-data-analysis/</guid>
+      <description>Import agriculture-and-rural-development.csv filePlease fin the data file href = “https://github.com/ZeningQu/World-Bank-Data-by-Indicators”
+Data explanation: Sustainability deveopment in Canada’s agriculture sectorSustainability development has attracted much attention in recent years. To implement sustainability, supply chain players should meet environmental and social concerns and also minimize costs. In this data exploratory, we want to investigate the sustainability pillars in agricultural sector in Canada.
+QuestionsWhat are the environmental factors in the data set?</description>
+    </item>
+    
     <item>
       <title>Assignmnet A04: Shiny App</title>
       <link>/2021/06/16/assignmnet-a04-shiny-app/</link>

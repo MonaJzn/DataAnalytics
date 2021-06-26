@@ -13,6 +13,7 @@ library(tidyverse)
 lego <- read_csv(file = "lego_sales.csv")
 lego <- read_csv(file.choose())
 head(lego)
+
 ```
 ## What are the three most common first names of customers?
 ```{r}
@@ -119,7 +120,7 @@ Age group 26-35 has purchased the most pieces of lego sets, almost 8000 pieces o
   filter(theme == "Star Wars")
 
   ggplot(lego_age_s, aes(age_group, spend)) +
-  geom_col(alpha = 0.6, fill = "green") +
+  geom_col(alpha = 0.8, fill = "lightgreen") +
   theme_minimal() +
   labs(
     x = "Age group", y = "Spend", 

@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Hugo 0.83.1" />
+
+
+<title>Assignment A05: Exploratory Data Analysis - MonaJzn - Fundamentals of Analytics</title>
+<meta property="og:title" content="Assignment A05: Exploratory Data Analysis - MonaJzn - Fundamentals of Analytics">
+
+
+  <link href='/favicon.ico' rel='icon' type='image/x-icon'/>
+
+
+
+  
+
+
+
+
+
+
+
+
+<link href='//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css' rel='stylesheet' type='text/css' />
+
+
+
+<link rel="stylesheet" href="/css/fonts.css" media="all">
+<link rel="stylesheet" href="/css/main.css" media="all">
+
+
+
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header">
+        <nav class="nav">
+  <a href="/" class="nav-logo">
+    <img src="/images/logo.png"
+         width="50"
+         height="50"
+         alt="Logo">
+  </a>
+
+  <ul class="nav-links">
+    
+    <li><a href="https://github.com/MonaJzn/DataAnalytics">About</a></li>
+    
+    <li><a href="https://github.com/rstudio/blogdown">GitHub</a></li>
+    
+    <li><a href="https://www.linkedin.com/in/mona-jazinaninejad-b69370195/">linkedin</a></li>
+    
+    <li><a href="https://twitter.com/rstudio">Twitter</a></li>
+    
+  </ul>
+</nav>
+
+      </header>
+
+
+<main class="content" role="main">
+
+  <article class="article">
+    
+    <span class="article-duration">6 min read</span>
+    
+
+    <h1 class="article-title">Assignment A05: Exploratory Data Analysis</h1>
+
+    
+    <span class="article-date">2021-06-19</span>
+    
+
+    <div class="article-content">
+      
+<script src="/2021/06/19/assignment-a05-exploratory-data-analysis/index_files/header-attrs/header-attrs.js"></script>
+
+
+<div id="import-agriculture-and-rural-development.csv-file" class="section level2">
+<h2>Import agriculture-and-rural-development.csv file</h2>
+<p>Please fin the data file href = “<a href="https://github.com/ZeningQu/World-Bank-Data-by-Indicators" class="uri">https://github.com/ZeningQu/World-Bank-Data-by-Indicators</a>”</p>
+</div>
+<div id="data-explanation-sustainability-deveopment-in-canadas-agriculture-sector" class="section level2">
+<h2>Data explanation: Sustainability deveopment in Canada’s agriculture sector</h2>
+<p>Sustainability development has attracted much attention in recent years. To implement sustainability, supply chain players should meet environmental and social concerns and also minimize costs. In this data exploratory, we want to investigate the sustainability pillars in agricultural sector in Canada.</p>
+</div>
+<div id="questions" class="section level2">
+<h2>Questions</h2>
+<ol style="list-style-type: decimal">
+<li>What are the environmental factors in the data set?</li>
+<li>Do the environmental pillar contribute to the sustainability?</li>
+<li>What is the role of fertilizer in environmental sustainability in Canada’s agriculture?</li>
+<li>What is the effect of arable land area on sustainability?</li>
+<li>What is the nitrous oxide emissions amount in rcent years and it’s relationship with fertilizer?</li>
+<li>What is the impact of methane emissions percent of total on sutainable development?</li>
+<li>How yearly employment in agriculture percent of total employment could affect social pillar?</li>
+<li>Does yearly agricultural machinery tractors per 100_sq_km_of arable land affect employment?</li>
+<li>Is there any relationship between rural population growth and employment rate?</li>
+<li>How agriculture_forestry_and_fishing_value_added_percent_of_gdp contributes to the economic pilar?</li>
+<li>How early agricultural raw materials exports percent of merchandise exports contributes to the economic pilar?</li>
+<li>How early agricultural raw materials imports percent of merchandise imports contributes to the economic pilar?</li>
+</ol>
+</div>
+<div id="environmental-pillar" class="section level2">
+<h2>Environmental pillar</h2>
+<p>In this part, environmental aspect of sustainability is explored by plotting arable land percentage, fertilizer consumption, agricultural methane emissions percent, and agricultural nitrous oxide emissions. These are the most related environmental pillars in this data set that highly affects the sustainability development in agriculture sector. In the following, the analysis of each plot is provided.</p>
+<p><img src="/2021/06/19/assignment-a05-exploratory-data-analysis/index_files/figure-html/unnamed-chunk-2-1.png" width="672" />
+First of all, only have the data for 2002-2015. Sustainability concept is produced in 1987 for the first time. Therefore, it was better to compare the last decade to the previous ones to find the growth of indicators. As shown in Fig. 1, during the last decade, fertilizer consumption hes been increasing. This is not in line with the sustainability development goals. However, it’s possible that this enhancement is the cause of more agri-food production in arable lands to meet the need of growing population. Therefore, we should investigate arable land percent of land area.</p>
+<p><img src="/2021/06/19/assignment-a05-exploratory-data-analysis/index_files/figure-html/unnamed-chunk-3-1.png" width="672" />
+As indicated in Fig. 2, in the most recent years of available date, arable_land_percent_of_land_area is decreasing while fertilizer utilization is increasing. This means that agri-businesses are using more fertilizer in a less arable area in recent years. Agriculural supply chains should find a better solution for producing more food rather than enhancing the utilization of fertilizers. Accordingly, there is a need to investigate the agricultural nitrous oxide emissions which is the result of fertilizer use in agriculture sector.</p>
+<p><img src="/2021/06/19/assignment-a05-exploratory-data-analysis/index_files/figure-html/unnamed-chunk-4-1.png" width="672" />
+First about data, nitrous oxide emissions date is more based on the 1970-2010. we can see three outlier data relating to 1970, 1980, and 1990. But we can see the increasing trend in nitrous oxide emissions. This increase is the result of fertilizer consumption. Therefore, now we are sure that the agricultural actors should find a solution for this emission and its effects on the climate change and sustainability.
+<img src="/2021/06/19/assignment-a05-exploratory-data-analysis/index_files/figure-html/unnamed-chunk-5-1.png" width="672" />
+First of all, metane emissions date is more based on the 1970-2010. It was better to have more updated data. We can also find three outliers data relating to 1970, 1980, and 1990. The food system is one of the largest emitters of methane. Therefore, methane emission investigation is of high importance. In recent years of date set, 2000-2010, the methane emission trend is almost increasing. However, from 1975 to 1995, we see the decreaing trend. Therefore, it has not a steady trend but the last decade is more important to our analysis that shows the enhancing trend. All in all, agricultural supply chain players should pay more attention to environmental pillar of sustainability.</p>
+</div>
+<div id="social-pillar" class="section level2">
+<h2>Social pillar</h2>
+<p>In this section, the social indicators of sustainability addressed in the data set of agriculture are explored.</p>
+<p><img src="/2021/06/19/assignment-a05-exploratory-data-analysis/index_files/figure-html/unnamed-chunk-6-1.png" width="672" />
+Fig. 5 indicates employment_in_agriculture_percent_of_total_employment for available years. Unfortunately, we have only the data from 1990. As shown, the employment of agricultural sector compared to total employment in Canada is decreasing. Employment rate and job creating is the most important social indicator in all sectors. However, we could investigate other probable influential parameters on employment rat. For instance, mechanization of agriculture products could be a reason.</p>
+<p><img src="/2021/06/19/assignment-a05-exploratory-data-analysis/index_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<pre><code>## List of 1
+##  $ legend.position: chr &quot;no&quot;
+##  - attr(*, &quot;class&quot;)= chr [1:2] &quot;theme&quot; &quot;gg&quot;
+##  - attr(*, &quot;complete&quot;)= logi FALSE
+##  - attr(*, &quot;validate&quot;)= logi TRUE</code></pre>
+<p>In the dataset, we have the agricultural machinery tractors information from 1960-2011. Note that the amount for 1970, 1980, and 1990 are not reliable. According to Fig. 6, the increase in agricultural machinery tractors during 1990-2011 is not enough significant to supports the lower rate of employment in agriculture sector in Canada. Therefore, we could explore other social indicators according to the available data.</p>
+<p><img src="/2021/06/19/assignment-a05-exploratory-data-analysis/index_files/figure-html/unnamed-chunk-8-1.png" width="672" />
+The question is if the population of rural area is decreasing then we can conclude that decreasing employment rate would be the result of that. Therefore, to answer this question, Fig. 7 is plotted. As shown, between 1990-2016, we see an uneven trend in rural population growth. Although generally the population growth of rural area decreased from 1980, we cannot find a significant relationship between employment rate and population growth rate. May be there are other effective factors that we have not in this data set. All in all, employment rate, which is one of the most important factors of sustainability in other sectors, has not any contribution to the sustainable development of agriculture in Canada, specifically in the duration of existing data.</p>
+</div>
+<div id="economic-pillar" class="section level2">
+<h2>Economic pillar</h2>
+<p><img src="/2021/06/19/assignment-a05-exploratory-data-analysis/index_files/figure-html/unnamed-chunk-9-1.png" width="672" />
+Increasing the profitability of agriculture supply chains or decreasing the costs of chains is the goal of economical aspect of sustainability development.However, we do not have straight-forward data that directly investigate the profit or cost.Fig. 8 plots the agriculture forestry and fishing value added percent of gdp in Canada. As shown, we only have the data of 2007 to 2014. Moreover, there is no significant increasing or decreasing trend in that.</p>
+<p><img src="/2021/06/19/assignment-a05-exploratory-data-analysis/index_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<p><img src="/2021/06/19/assignment-a05-exploratory-data-analysis/index_files/figure-html/unnamed-chunk-11-1.png" width="672" />
+Other related data to the economical aspect of sustainability in the data set are export and import percentage of total merchandise in Canada. Figs. 9 and 10 show that there is a decreasing trend in agricultural raw materials export and import. In both figures, we can see the outlier data in 1970, 1980, and 1990. Fig. 9 show that exports amount is more than import amount by comparing import and export amounts year by year. Therefore, we conclude that agriculture in Canada is economically profitable that supports the economic pilar of sustainability.</p>
+</div>
+<div id="summary" class="section level2">
+<h2>Summary</h2>
+<p>The data set provides the information of agriculture sector and we aimed to investigate the sustainability development factors in the Canada for the available years. Some part of data lacks sufficient data especially for the early years of study. Other have outlier data for some of years. All in all, we conclude that agricultural sector in Canada should pay more attention to the environmental and social aspect of sustainability. The economic pilar works well and it seems to be profitable.</p>
+</div>
+
+    </div>
+  </article>
+
+  
+
+
+</main>
+
+      <footer class="footer">
+        <ul class="footer-links">
+          <li>
+            <a href="/index.xml" type="application/rss+xml" target="_blank">RSS feed</a>
+          </li>
+          <li>
+            <a href="https://gohugo.io/" class="footer-links-kudos">Made with <img src="/images/hugo-logo.png" alt="Img link to Hugo website" width="22" height="22"></a>
+          </li>
+        </ul>
+      </footer>
+
+    </div>
+    
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/r.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+
+
+
+    
+<script src="/js/math-code.js"></script>
+<script async src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+    
+  </body>
+</html>
+

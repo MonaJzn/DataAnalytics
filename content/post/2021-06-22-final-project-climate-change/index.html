@@ -1,0 +1,123 @@
+---
+title: 'Final project: Climate change'
+author: MonaJzn
+date: '2021-06-22'
+slug: final-project-climate-change
+categories:
+  - ggplot2
+  - tidyvers
+tags: []
+---
+
+<script src="{{< blogdown/postref >}}index_files/header-attrs/header-attrs.js"></script>
+
+
+<div id="import-climate-change.csv-file" class="section level2">
+<h2>Import climate-change.csv file</h2>
+<p>Please find the data file href = “<a href="https://github.com/ZeningQu/World-Bank-Data-by-Indicators" class="uri">https://github.com/ZeningQu/World-Bank-Data-by-Indicators</a>”</p>
+</div>
+<div id="data-explanation-climate-change-in-us" class="section level2">
+<h2>Data explanation: Climate change in US</h2>
+<p>Due to the importance of This data set includes climate change information for countries throughout the world from 1960-2016. Climate change data provides information about green house gas(GHG) emissions, land areas, population, and renewable energy.In this project, I am going to explore climate change indicators in the US from 1960-2016. In some indicators, we may have information for shorter time horizon. In the following, the project questions are provided based on the four main subject area of (1)GHG emissions, (2) Population, (3) Renewable energy, and (4) Land analysis.</p>
+</div>
+<div id="questions" class="section level2">
+<h2>Questions</h2>
+<p>Investigation of GHG emissions:</p>
+<ol style="list-style-type: decimal">
+<li>What is the trend of annual emitting Co2 from gaseous fuel consumption, liquid fuel consumption, and solid liquid fuel consumption in the US?</li>
+<li>What is the trend of annual emitting Nitrous oxide in the US?</li>
+<li>What is the trend of annual emitting Methane in the US?</li>
+</ol>
+<p>Population:</p>
+<ol start="4" style="list-style-type: decimal">
+<li>Has population growth an impact on GHG emission?</li>
+<li>Has total population trend an impact on GHG emission?</li>
+</ol>
+<p>Renewable energy:</p>
+<ol start="6" style="list-style-type: decimal">
+<li>What is the trend of renewable energy consumption?</li>
+</ol>
+<p>Land analysis:</p>
+<ol start="7" style="list-style-type: decimal">
+<li>What is the effect of arable land on climate change?</li>
+<li>What is the effect of agricultural land percent on climate change?</li>
+</ol>
+<p>Regression:</p>
+<ol start="9" style="list-style-type: decimal">
+<li>What are the prediction of total population of the US in 2025 and the renewable energy consumption percent of total final energy consumption?</li>
+</ol>
+</div>
+<div id="ghg-emissions" class="section level2">
+<h2>GHG emissions</h2>
+</div>
+<div id="co2-emissions" class="section level1">
+<h1>CO2 emissions</h1>
+<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-2-1.png" width="672" />
+Fig. 1 shows yearly co2 emissions from gaseous fuel consumption percent of total. As shown, we have four outlier data, 1960, 1970, 1980, and 1990. Moreover, there is not a steady increasing or decreasing trend in data. Nevertheless, last two decades are more important for us as climate change issues has attracted more attention in recent years. The increasing amount of emitting Co2 from gaseous fuel consumption in recent years is obvious. We suggest using more bio-gas to save the environment.</p>
+<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-3-1.png" width="672" />
+In Fig. 2, yearly co2 emissions from liquid fuel consumption percent of total is plotted. Like the previous Figure, we have four outlier data, 1960, 1970, 1980, and 1990. In total, we can see a decreasing rate of Co2 emission from liquid fuel consumption between 1960-2014. In recent years, there is no significant change in the amount of Co2 emitted. However, the Co2 emission from liquid fuel is almost 40% of total amount which is 15%-20% in average more than gaseous fuel emission.</p>
+<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-4-1.png" width="672" />
+In Fig. 3, yearly co2 emissions from solid fuel consumption percent of total is plotted. There are four outlier data in years 1960, 1970, 1980, and 1990. Besides, Co2 emissions in years between 1980-2014 are more than 1960-1980. In last five years of study, we can see a significant decrease, almost 5 percent, in the Co2 emission. It shows that solid fuel consumption is diminishing. We know that reducing the Co2 emission which is the most important GHG emission is so good for climate change concens.</p>
+<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-5-1.png" width="672" />
+Fig. 4 indicates the Nitrous oxide emissions percent change from 1990-2012. There is a decreasing trend in the last two decades. Nitrous oxide could be emitted because of pesticide use in agriculture sector. Significant decrease in the emitted amount of Nitrous has positive effect on climate change indicators.</p>
+<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-6-1.png" width="672" />
+Methane is another result of using pesticides in agri-business industry. Fig. 5 shows methane emissions percent change from 1990-2012. Fortunately, there is a diminishing trend in methane emission. We can see almost 20 percent decrease in methane emission. Although Methane is one of the GHG emissions, it’s decreasing trend is so good for climate change concerns. According to the climate change indicators analysis, average rate of GHG emission is decreasing especially from 2000, but which factor is the reason of that? Population growth rate or renewable energy consumption? Lets go to the next steps of analysis to find the solution.</p>
+<div id="population" class="section level2">
+<h2>Population</h2>
+<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-7-1.png" width="672" />
+First, there are four outlier data in years 1960, 1970, 1980, and 1990. Fig. 6 indicates the annual percent of population growth between 1960-2016. It’s a sharp increase in population growth in 1990 but we do not know the reseaon. In total, there is a decreasing population growth rate from 1990 in the US. May be it’s the reason of decreasing some GHG emissions but we should take a look at the annual population.</p>
+<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-8-1.png" width="672" />
+There are also four outlier data in years 1960, 1970, 1980, and 1990. Fig. 7 shows the annual total population in the Us. Although there is a diminishing trend in population growth of the US, total population is increasing from 1960. Therefore, the population would not be the main reason of decreasing some GHG emissions. In the next phase of data analysis, we are going to explore the renewable energy consumption in the US.</p>
+</div>
+<div id="renewable-energy" class="section level2">
+<h2>Renewable energy</h2>
+<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-9-1.png" width="672" />
+Fig. 8 shows the share of annually renewable energy consumption from total energy consumption in the US. As shown, there is a sharp increase in renewable consumption from 2000-2015, almost 3.5 percent. Therefore, this increase could be the reason of decreasing some GHG emissions. However, the maximum percent of renewable consumption is 7.5 percent which is very low compared to the other energy sources that can impose hazardous impacts on the environment. Our most concern is Co2 emissions from gaseous fuel consumption that we suggest to use more biogas sources.</p>
+</div>
+<div id="land-analysis" class="section level2">
+<h2>Land analysis</h2>
+<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-10-1.png" width="672" />
+There are also four outlier data in years 1960, 1970, 1980, and 1990 which shows the weakness of the data set in some varables. According to Fig. 9, the annual arable land percet of land area in the US has decreased specially from 2000 to 2015. This shows the effect of climate change in the arable land area which provides the agriculture land area. This means that by increasing population in the US, the arable land area is decreasing and accordingly it may result in decreasing food production. Therefore, we need to analyze the agriculture land percent in this study.</p>
+<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-11-1.png" width="672" />
+There are four outlier data in years 1960, 1970, 1980, and 1990. As indicated in Fig. 10, we can see a decreasing trend in agricultural land percent of land area, almost 5 percent decrease. Nevertheless, in recent years, especially from 2000, the agricultural land percent has steady trend and it resolves our concerns about the lack of food production because of decreasing arable land percent of land area from 2000(please see Fig. 9). However, it may affect the agricultural land percent in the following years that we have no it’s data. We can use linear regression model to predict the trend of agricultural land percent.</p>
+</div>
+</div>
+<div id="what-are-the-prediction-of-total-population-of-the-us-in-2025-and-the-renewable-energy-consumption-percent-of-total-final-energy-consumption" class="section level1">
+<h1>What are the prediction of total population of the US in 2025 and the renewable energy consumption percent of total final energy consumption?</h1>
+<p>To answer this question, we plot two linear regression model to find the prediction of annual total population of the US and the renewable energy consumption percent of total final energy consumption in the US?</p>
+<p><span class="math display">\[\widehat{population_total}_{i} = \beta_0 + \beta_1 \times year_{i}\]</span></p>
+<pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
+<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+<pre><code>## # A tibble: 2 x 5
+##   term            estimate  std.error statistic   p.value
+##   &lt;chr&gt;              &lt;dbl&gt;      &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
+## 1 (Intercept) -3567770388. 852501925.     -4.19 0.000102 
+## 2 year            1928045.    428701.      4.50 0.0000351</code></pre>
+</div>
+<div id="the-us-total-population-year" class="section level1">
+<h1>The US total population &amp; year</h1>
+<p>As the p.value is less than 0.05, we conclude that this linear regression is perfectly fitted to our data set. In the following, you can see the relationship between the US total population and year.</p>
+<p><span class="math display">\[\widehat{totalpopulation_{in}} = -3567770388 + 1928045~year\]</span>
+What is the US total population in 2025?</p>
+<p><span class="math display">\[\widehat{totalpopulation_{in}} = -3567770388 + 1928045 * 2025 = 336520737\]</span></p>
+<p><span class="math display">\[\widehat{Renewableenergyconsumption}_{i} = \beta_0 + \beta_1 \times year_{i}\]</span></p>
+<pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
+<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
+<pre><code>## # A tibble: 2 x 5
+##   term        estimate std.error statistic    p.value
+##   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;      &lt;dbl&gt;
+## 1 (Intercept) -313.      57.0        -5.48 0.0000124 
+## 2 year           0.159    0.0285      5.59 0.00000946</code></pre>
+</div>
+<div id="renewable-energy-consumption-percent-of-total-energy-consumption-year" class="section level1">
+<h1>Renewable energy consumption percent of total energy consumption &amp; year</h1>
+<p>As the p.value is less than 0.05, we conclude that this linear regression is perfectly fitted to our data set. In the following, you can see the relationship between the US renewable energy consumption percent of total energy consumption and year.
+<span class="math display">\[\widehat{Renewableenergyconsumption_{in}} = -312.5935454   + 0.1591569~year\]</span>
+What is the US renewable energy consumption percent of total energy consumption in 2025?</p>
+<p><span class="math display">\[\widehat{Renewableenergyconsumption_{in}} = -312.5935454   + 0.1591569 * 2025 = 9.6991771 \]</span></p>
+<p>Therefore, in 2025, the US total population is predicted to be 336520737 with almost 9.7 renewable energy consumption percent of total energy consumption. Compared to the 2015, the prediction shows only 1 percent increase in renewable energy consumption by increasing 19280450 people in the US. Due to importance of sustainable development and climate change concerns in recent years, we suggest to use more renewable energy sources to save the environment and human health.</p>
+<div id="summary" class="section level2">
+<h2>Summary</h2>
+<p>The climate change data set provides some environmental, poulation, renewable energy consumption, and population indicators between 1960-2016. In this project, the US climate change indicators for available years have been analyzed. In some indicators, there are outlier data for some years including 1960, 1970, 1980, and 1990. Generally, the GHG emission is decreasing in recent years and the renewable energy consumption is increasing. However, we suggest more renewable energy consumption as the US total population is decreasing. Accordingly, we could move toward sustainability development and reduce climate change concerns.</p>
+</div>
+</div>

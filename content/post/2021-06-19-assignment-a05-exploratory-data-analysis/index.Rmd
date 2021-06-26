@@ -23,11 +23,10 @@ agriculture <- read_csv(file.choose(), na = c("0"))
 agri <- agriculture %>%
   clean_names()
 
-head(agri)
 
 agr <- agri %>% 
   arrange(year)
-agr
+
 ```
 ## Data explanation: Sustainability deveopment in Canada's agriculture sector
 
