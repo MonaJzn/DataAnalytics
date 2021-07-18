@@ -1,0 +1,138 @@
+---
+title: Assignment 02_Business Analytics
+author: MonaJzn
+date: '2021-07-16'
+slug: assignment-02-business-analytics
+categories:
+  - ggplot2
+  - tidyvers
+tags: []
+---
+## Import Data: Bank
+```{r message = FALSE, echo = FALSE, warning = FALSE}
+library(tidyverse)
+library(dplyr)
+library(magrittr)
+library(keras)
+
+bank <- read.table("bank-additional-full.csv", head = TRUE, sep = ";", stringsAsFactors=T)
+head(bank)
+```
+# Attribute Information:
+The data is related with direct marketing campaigns of a Portuguese banking institution. The marketing campaigns were based on phone calls. Often, more than one contact to the same client was required, in order to access if the product (bank term deposit) would be ('yes') or not ('no') subscribed.
+
+##Input variables:
+
+# bank client data:
+
+1 - age (numeric)
+
+2 - job : type of job (categorical:'admin.','blue-collar','entrepreneur','housemaid','management','retired','self-employed','services','student','technician','unemployed','unknown')
+
+3 - marital : marital status (categorical: 'divorced','married','single','unknown'; note: 'divorced' means divorced or widowed)
+
+4 - education (categorical:'basic.4y','basic.6y','basic.9y','high.school','illiterate','professional.course','university.degree','unknown')
+
+5 - default: has credit in default? (categorical: 'no','yes','unknown')
+
+6 - housing: has housing loan? (categorical: 'no','yes','unknown')
+
+7 - loan: has personal loan? (categorical: 'no','yes','unknown')
+
+# related with the last contact of the current campaign:
+
+8 - contact: contact communication type (categorical: 'cellular','telephone')
+
+9 - month: last contact month of year (categorical: 'jan', 'feb', 'mar', ..., 'nov', 'dec')
+
+10 - day_of_week: last contact day of the week (categorical:'mon','tue','wed','thu','fri')
+
+11 - duration: last contact duration, in seconds (numeric). Important note: this attribute highly affects the output target (e.g., if duration=0 then y='no'). Yet, the duration is not known before a call is performed. Also, after the end of the call y is obviously known. Thus, this input should only be included for benchmark purposes and should be discarded if the intention is to have a realistic predictive model.
+
+# other attributes:
+
+12 - campaign: number of contacts performed during this campaign and for this client (numeric, includes last contact)
+
+13 - pdays: number of days that passed by after the client was last contacted from a previous campaign (numeric; 999 means client was not previously contacted)
+
+14 - previous: number of contacts performed before this campaign and for this client (numeric)
+
+15 - poutcome: outcome of the previous marketing campaign (categorical: 'failure','nonexistent','success')
+
+# social and economic context attributes
+
+16 - emp.var.rate: employment variation rate - quarterly indicator (numeric)
+
+17 - cons.price.idx: consumer price index - monthly indicator (numeric)
+
+18 - cons.conf.idx: consumer confidence index - monthly indicator (numeric)
+
+19 - euribor3m: euribor 3 month rate - daily indicator (numeric)
+
+20 - nr.employed: number of employees - quarterly indicator (numeric)
+
+Output variable (desired target):
+21 - y - has the client subscribed a term deposit? (binary: 'yes','no')
+
+# Logistic regression model
+
+In the present logistic regression model, we model y with the following explanatory variables: age, euribor3m, and job. We want to see that whether these variables are significant in the logistic regression model for client subscription for a term deposit.
+```{r message = FALSE, echo = FALSE, warning = FALSE}
+
+model <- glm(y ~ age + euribor3m + job, data = bank, family = binomial)
+
+summary(model)
+```
+As can be seen, euribor3m and some types of jobs are very significant. Blue-collar, entrepreneur, housemaid, retired, services, and students are the most significant jobs.Only the self-employed one is not significant that means that they would not subscribe for bank term deposit.
+
+%# Confusion matrix
+%```{r message = FALSE, echo = FALSE, warning = FALSE}
+%actual_response <- bank$y
+%predicted_response <- round(fitted(model))
+%outcomes <- table(predicted_response, actual_response)
+%confusion <- conf_mat(outcomes)
+%autoplot(confusion)
+%summary(confusion, event_level = "second")
+%```
+
+#Prediction
+
+In this section, we provide the prediction model. According to the results, 4640 out of 41188 would subscribe for the bank term deposit. Also, the mean is almost about 0.89 which is perfect. Lets make training and test subsets to evaluate the model.
+```{r message = FALSE, echo = FALSE, warning = FALSE}
+probs <- predict(model, type = "response")
+
+prediction <- ifelse(probs > 0.5, "yes", "no")
+
+attach(bank)
+table(prediction, y)
+mean(prediction == y)
+```
+# Make training, test set and refit the model
+We splits the data to duration < 300 for train, and duration > 300 for test subset. Running the training model, we can see that the effect of age variable is more significant that the previous one. Only the job retired is not significant in this training data. in the following, you can find the prediction model.
+```{r message = FALSE, echo = FALSE, warning = FALSE}
+train <- duration < 300
+model <- glm(y ~ age + euribor3m + job, data = bank, family = binomial, subset = train)
+summary(model)
+
+```
+
+# Predict
+Results of prediction model show that 3131 of clients would subscribe for the bank term deposit which is lower than the previous one. Although the mean of the model is less than the previous model, 0.72 < 0.89, it still satisfying and large enough.
+```{r message = FALSE, echo = FALSE, warning = FALSE}
+probs <- predict(model, newdata = bank[!train,], type = "response")
+prediction <- ifelse(probs > 0.5, "yes", "no")
+y.300 <- bank$y[!train]
+
+table(prediction, y.300)
+mean(prediction == y.300)
+```
+
+
+
+
+
+
+
+
+
+
