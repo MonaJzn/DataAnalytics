@@ -1,0 +1,15 @@
+---
+title: Assignment A02_Business Analytics
+author: MonaJzn
+date: '2021-07-24'
+slug: assignment-A03_Business-Analytics
+categories:
+  - tidyvers
+  - ggplot2
+tags: []
+---
+
+
+
+
+

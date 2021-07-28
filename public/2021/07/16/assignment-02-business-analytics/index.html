@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Hugo 0.83.1" />
+
+
+<title>Assignment 02_Business Analytics - MonaJzn - Fundamentals of Analytics</title>
+<meta property="og:title" content="Assignment 02_Business Analytics - MonaJzn - Fundamentals of Analytics">
+
+
+  <link href='/favicon.ico' rel='icon' type='image/x-icon'/>
+
+
+
+  
+
+
+
+
+
+
+
+
+<link href='//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css' rel='stylesheet' type='text/css' />
+
+
+
+<link rel="stylesheet" href="/css/fonts.css" media="all">
+<link rel="stylesheet" href="/css/main.css" media="all">
+
+
+
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header">
+        <nav class="nav">
+  <a href="/" class="nav-logo">
+    <img src="/images/logo.png"
+         width="50"
+         height="50"
+         alt="Logo">
+  </a>
+
+  <ul class="nav-links">
+    
+    <li><a href="https://github.com/MonaJzn/DataAnalytics">About</a></li>
+    
+    <li><a href="https://github.com/rstudio/blogdown">GitHub</a></li>
+    
+    <li><a href="https://www.linkedin.com/in/mona-jazinaninejad-b69370195/">linkedin</a></li>
+    
+    <li><a href="https://twitter.com/rstudio">Twitter</a></li>
+    
+  </ul>
+</nav>
+
+      </header>
+
+
+<main class="content" role="main">
+
+  <article class="article">
+    
+    <span class="article-duration">6 min read</span>
+    
+
+    <h1 class="article-title">Assignment 02_Business Analytics</h1>
+
+    
+    <span class="article-date">2021-07-16</span>
+    
+
+    <div class="article-content">
+      
+<script src="/2021/07/16/assignment-02-business-analytics/index_files/header-attrs/header-attrs.js"></script>
+
+
+<div id="import-data-bank" class="section level2">
+<h2>Import Data: Bank</h2>
+<pre><code>##   age       job marital   education default housing loan   contact month
+## 1  56 housemaid married    basic.4y      no      no   no telephone   may
+## 2  57  services married high.school unknown      no   no telephone   may
+## 3  37  services married high.school      no     yes   no telephone   may
+## 4  40    admin. married    basic.6y      no      no   no telephone   may
+## 5  56  services married high.school      no      no  yes telephone   may
+## 6  45  services married    basic.9y unknown      no   no telephone   may
+##   day_of_week duration campaign pdays previous    poutcome emp.var.rate
+## 1         mon      261        1   999        0 nonexistent          1.1
+## 2         mon      149        1   999        0 nonexistent          1.1
+## 3         mon      226        1   999        0 nonexistent          1.1
+## 4         mon      151        1   999        0 nonexistent          1.1
+## 5         mon      307        1   999        0 nonexistent          1.1
+## 6         mon      198        1   999        0 nonexistent          1.1
+##   cons.price.idx cons.conf.idx euribor3m nr.employed  y
+## 1         93.994         -36.4     4.857        5191 no
+## 2         93.994         -36.4     4.857        5191 no
+## 3         93.994         -36.4     4.857        5191 no
+## 4         93.994         -36.4     4.857        5191 no
+## 5         93.994         -36.4     4.857        5191 no
+## 6         93.994         -36.4     4.857        5191 no</code></pre>
+</div>
+<div id="attribute-information" class="section level1">
+<h1>Attribute Information:</h1>
+<p>The data is related with direct marketing campaigns of a Portuguese banking institution. The marketing campaigns were based on phone calls. Often, more than one contact to the same client was required, in order to access if the product (bank term deposit) would be (‘yes’) or not (‘no’) subscribed.</p>
+<p>##Input variables:</p>
+</div>
+<div id="bank-client-data" class="section level1">
+<h1>bank client data:</h1>
+<p>1 - age (numeric)</p>
+<p>2 - job : type of job (categorical:‘admin.’,‘blue-collar’,‘entrepreneur’,‘housemaid’,‘management’,‘retired’,‘self-employed’,‘services’,‘student’,‘technician’,‘unemployed’,‘unknown’)</p>
+<p>3 - marital : marital status (categorical: ‘divorced’,‘married’,‘single’,‘unknown’; note: ‘divorced’ means divorced or widowed)</p>
+<p>4 - education (categorical:‘basic.4y’,‘basic.6y’,‘basic.9y’,‘high.school’,‘illiterate’,‘professional.course’,‘university.degree’,‘unknown’)</p>
+<p>5 - default: has credit in default? (categorical: ‘no’,‘yes’,‘unknown’)</p>
+<p>6 - housing: has housing loan? (categorical: ‘no’,‘yes’,‘unknown’)</p>
+<p>7 - loan: has personal loan? (categorical: ‘no’,‘yes’,‘unknown’)</p>
+</div>
+<div id="related-with-the-last-contact-of-the-current-campaign" class="section level1">
+<h1>related with the last contact of the current campaign:</h1>
+<p>8 - contact: contact communication type (categorical: ‘cellular’,‘telephone’)</p>
+<p>9 - month: last contact month of year (categorical: ‘jan’, ‘feb’, ‘mar’, …, ‘nov’, ‘dec’)</p>
+<p>10 - day_of_week: last contact day of the week (categorical:‘mon’,‘tue’,‘wed’,‘thu’,‘fri’)</p>
+<p>11 - duration: last contact duration, in seconds (numeric). Important note: this attribute highly affects the output target (e.g., if duration=0 then y=‘no’). Yet, the duration is not known before a call is performed. Also, after the end of the call y is obviously known. Thus, this input should only be included for benchmark purposes and should be discarded if the intention is to have a realistic predictive model.</p>
+</div>
+<div id="other-attributes" class="section level1">
+<h1>other attributes:</h1>
+<p>12 - campaign: number of contacts performed during this campaign and for this client (numeric, includes last contact)</p>
+<p>13 - pdays: number of days that passed by after the client was last contacted from a previous campaign (numeric; 999 means client was not previously contacted)</p>
+<p>14 - previous: number of contacts performed before this campaign and for this client (numeric)</p>
+<p>15 - poutcome: outcome of the previous marketing campaign (categorical: ‘failure’,‘nonexistent’,‘success’)</p>
+</div>
+<div id="social-and-economic-context-attributes" class="section level1">
+<h1>social and economic context attributes</h1>
+<p>16 - emp.var.rate: employment variation rate - quarterly indicator (numeric)</p>
+<p>17 - cons.price.idx: consumer price index - monthly indicator (numeric)</p>
+<p>18 - cons.conf.idx: consumer confidence index - monthly indicator (numeric)</p>
+<p>19 - euribor3m: euribor 3 month rate - daily indicator (numeric)</p>
+<p>20 - nr.employed: number of employees - quarterly indicator (numeric)</p>
+<p>Output variable (desired target):
+21 - y - has the client subscribed a term deposit? (binary: ‘yes’,‘no’)</p>
+</div>
+<div id="logistic-regression-model" class="section level1">
+<h1>Logistic regression model</h1>
+<p>In the present logistic regression model, we model y with the following explanatory variables: age, euribor3m, and job. We want to see that whether these variables are significant in the logistic regression model for client subscription for a term deposit.</p>
+<pre><code>## 
+## Call:
+## glm(formula = y ~ age + euribor3m + job, family = binomial, data = bank)
+## 
+## Deviance Residuals: 
+##     Min       1Q   Median       3Q      Max  
+## -1.1164  -0.4270  -0.3166  -0.2510   2.7058  
+## 
+## Coefficients:
+##                   Estimate Std. Error z value Pr(&gt;|z|)    
+## (Intercept)      -0.567098   0.077203  -7.346 2.05e-13 ***
+## age               0.004517   0.001777   2.542  0.01103 *  
+## euribor3m        -0.513701   0.009676 -53.092  &lt; 2e-16 ***
+## jobblue-collar   -0.612790   0.052270 -11.724  &lt; 2e-16 ***
+## jobentrepreneur  -0.349384   0.102342  -3.414  0.00064 ***
+## jobhousemaid     -0.094884   0.113859  -0.833  0.40465    
+## jobmanagement    -0.139853   0.069032  -2.026  0.04277 *  
+## jobretired        0.357183   0.083333   4.286 1.82e-05 ***
+## jobself-employed -0.172366   0.095540  -1.804  0.07121 .  
+## jobservices      -0.459570   0.067427  -6.816 9.37e-12 ***
+## jobstudent        0.501106   0.085254   5.878 4.16e-09 ***
+## jobtechnician    -0.062267   0.051398  -1.211  0.22572    
+## jobunemployed     0.062872   0.100059   0.628  0.52977    
+## jobunknown       -0.002085   0.188139  -0.011  0.99116    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## (Dispersion parameter for binomial family taken to be 1)
+## 
+##     Null deviance: 28999  on 41187  degrees of freedom
+## Residual deviance: 24983  on 41174  degrees of freedom
+## AIC: 25011
+## 
+## Number of Fisher Scoring iterations: 5</code></pre>
+<p>As can be seen, euribor3m and some types of jobs are very significant. Blue-collar, entrepreneur, housemaid, retired, services, and students are the most significant jobs.Only the self-employed one is not significant that means that they would not subscribe for bank term deposit.</p>
+<p>%# Confusion matrix
+%<code>{r message = FALSE, echo = FALSE, warning = FALSE} %actual_response &lt;- bank$y %predicted_response &lt;- round(fitted(model)) %outcomes &lt;- table(predicted_response, actual_response) %confusion &lt;- conf_mat(outcomes) %autoplot(confusion) %summary(confusion, event_level = "second") %</code></p>
+<p>#Prediction</p>
+<p>In this section, we provide the prediction model. According to the results, 4640 out of 41188 would subscribe for the bank term deposit. Also, the mean is almost about 0.89 which is perfect. Lets make training and test subsets to evaluate the model.</p>
+<pre><code>##           y
+## prediction    no   yes
+##         no 36548  4640</code></pre>
+<pre><code>## [1] 0.8873458</code></pre>
+</div>
+<div id="make-training-test-set-and-refit-the-model" class="section level1">
+<h1>Make training, test set and refit the model</h1>
+<p>We splits the data to duration &lt; 300 for train, and duration &gt; 300 for test subset. Running the training model, we can see that the effect of age variable is more significant that the previous one. Only the job retired is not significant in this training data. in the following, you can find the prediction model.</p>
+<pre><code>## 
+## Call:
+## glm(formula = y ~ age + euribor3m + job, family = binomial, data = bank, 
+##     subset = train)
+## 
+## Deviance Residuals: 
+##     Min       1Q   Median       3Q      Max  
+## -1.0924  -0.3086  -0.0603  -0.0400   3.9232  
+## 
+## Coefficients:
+##                  Estimate Std. Error z value Pr(&gt;|z|)    
+## (Intercept)      -0.33408    0.13619  -2.453  0.01417 *  
+## age               0.00795    0.00302   2.633  0.00847 ** 
+## euribor3m        -1.27073    0.04344 -29.250  &lt; 2e-16 ***
+## jobblue-collar   -1.26040    0.11278 -11.176  &lt; 2e-16 ***
+## jobentrepreneur  -0.88925    0.22441  -3.963 7.41e-05 ***
+## jobhousemaid     -0.07000    0.20162  -0.347  0.72844    
+## jobmanagement    -0.17706    0.11774  -1.504  0.13261    
+## jobretired        0.25417    0.13737   1.850  0.06428 .  
+## jobself-employed -0.20221    0.16456  -1.229  0.21915    
+## jobservices      -0.93433    0.13886  -6.728 1.71e-11 ***
+## jobstudent        0.56269    0.12175   4.622 3.80e-06 ***
+## jobtechnician    -0.09595    0.08891  -1.079  0.28051    
+## jobunemployed     0.17392    0.15801   1.101  0.27102    
+## jobunknown        0.15243    0.29950   0.509  0.61079    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## (Dispersion parameter for binomial family taken to be 1)
+## 
+##     Null deviance: 11957.5  on 29937  degrees of freedom
+## Residual deviance:  8061.3  on 29924  degrees of freedom
+## AIC: 8089.3
+## 
+## Number of Fisher Scoring iterations: 8</code></pre>
+</div>
+<div id="predict" class="section level1">
+<h1>Predict</h1>
+<p>Results of prediction model show that 3131 of clients would subscribe for the bank term deposit which is lower than the previous one. Although the mean of the model is less than the previous model, 0.72 &lt; 0.89, it still satisfying and large enough.</p>
+<pre><code>##           y.300
+## prediction   no  yes
+##         no 8119 3131</code></pre>
+<pre><code>## [1] 0.7216889</code></pre>
+</div>
+
+    </div>
+  </article>
+
+  
+
+
+</main>
+
+      <footer class="footer">
+        <ul class="footer-links">
+          <li>
+            <a href="/index.xml" type="application/rss+xml" target="_blank">RSS feed</a>
+          </li>
+          <li>
+            <a href="https://gohugo.io/" class="footer-links-kudos">Made with <img src="/images/hugo-logo.png" alt="Img link to Hugo website" width="22" height="22"></a>
+          </li>
+        </ul>
+      </footer>
+
+    </div>
+    
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/r.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+
+
+
+    
+<script src="/js/math-code.js"></script>
+<script async src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+    
+  </body>
+</html>
+

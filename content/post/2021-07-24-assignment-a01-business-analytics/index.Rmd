@@ -1,0 +1,319 @@
+---
+title: Assignment A01_Business Analytics
+author: MonaJzn
+date: '2021-07-24'
+slug: assignment-a01-business-analytics
+categories:
+  - tidyvers
+  - ggplot2
+tags: []
+---
+## Problem definition
+
+A professor of machine learning is planning to get married to his long-time girlfriend. He has never shopped for diamonds before. In the mall, he was confronted with a dizzying array of diamond characteristics, configurations, and pricing. His quick search revealed that diamonds are primarily characterized by 4C viz. Color, Cut, Carat Weight and Clarity besides Polish, Symmetry, and certification. He scrapped the web to collect information from three different wholesaler websites to build his pricing model to ensure he does not get cheated while purchasing the diamond ring. Build a Linear Regression Model to predict the price of the diamond ring of his interest.
+
+## Import data
+
+```{r message = FALSE, echo = FALSE, warning = FALSE}
+library(tidyverse)
+library(dplyr)
+library(ggplot2)
+library(tidymodels)
+
+diamond <- read_csv("MBA6636_SM21_Professor_Proposes_Data.csv", na = c("n/a", "", "NA"))
+diamond$Carat=as.numeric(diamond$Carat)
+
+glimpse(diamond)
+```
+
+We use exploratory graphs in data analysis to understand data properties, find patterns in data, suggest modeling strategies.
+
+## Univariate Analysis of Metric Data
+
+Univariate EDA for a quantitative variable is a way to make preliminary assessments about the population distribution of the variable using the data of the observed sample. 
+
+# Price
+The distribution of price shows two different range. First range is between $100-$700 and the second one is between almost $1800-$3300. With this information, we are not able to found that why there are no price data in range $800-$1700. Median of price is $2169 and the mean is $1717. The professor's diamond ring price is $3100 which almost near the maximum price of the price data set. It means that either the diamond ring is precious enough or the professor will get cheated. We should analyze other specification of diamond to found whether they are at the precious level or not.
+```{r message = FALSE, echo = FALSE, warning = FALSE}
+diamond %>%
+    ggplot(aes(Price)) +
+    geom_histogram(binwidth = 70, color = "black",fill = "lightgreen") +
+    labs(title = "Distribution of Price") +
+    theme_minimal() 
+boxplot(diamond$Price, col= "grey") 
+summary(diamond$Price)
+```
+
+# Carat
+
+Let's look at the another parameter of diamond ring, Carat. 
+```{r message = FALSE, echo = FALSE, warning = FALSE}
+diamond %>%
+    ggplot(aes(Carat)) +
+    geom_histogram(binwidth = 1, color = "black",fill = "lightgreen") +
+    labs(title = "Distribution of Carat") +
+    theme_minimal()
+boxplot(diamond$Carat, col= "grey")
+summary(diamond$Carat)
+```
+
+
+## Univariate Analysis of Non-Metric Data
+ In this section of analysis, the univariate analysis of non-metric variables are investigated
+
+# Colour
+Acording to the data, Colour includes D, E, F, G, H, I, G, K, and L. 
+D-F: Colorless
+G-I: Near Colorless
+J-K: Faint Yellow
+L-N: Very light yellow
+O-S: Light Yellow
+T-Z: Yellow
+
+The mode is for I and the least frequency relates to colour L. The professor wants to buy a diamond ring with colour J , Faint Yellow, which is the second most popular ring among all. However, with this univariate analysis we cannot found the relation between the most frequent colours and the price to help the professor. we need a bivariat analysis to figure out the estimation of the price based on the colour Faint Yellow.
+```{r message = FALSE, echo = FALSE, warning = FALSE}
+diamond %>%
+    ggplot(aes(Colour)) +
+    geom_bar(binwidth = 1, color = "black",fill = "lightgreen") +
+    labs(title = "Distribution of Color") +
+    theme_minimal()
+summary(diamond$Colour)
+```
+
+
+# Clarity
+
+I1: very few inclusions visible to naked eye
+I2: few inclusions visible to naked eye
+SI1: very very few inclusions at 10X
+SI2: very few inclusions at 10X
+SI3: several inclusions at 10X
+VS1: few inclusions at 30X
+VS: several inclusions at 30X
+VVS1: very very few inclusions at 30X
+VVS2: very few inclusions at 30X
+
+Figure shows that the most frequent clarity is SI1 which is very very few inclusions at 10X. The professor wants to buy a ring with SI2 that has very few inclusions at 10X and is the second most frequent type of ring among all. Again, we need a bivariate analysis to see the distribution of the  dimaond ring price based on different clarity features.
+```{r message = FALSE, echo = FALSE, warning = FALSE}
+diamond %>%
+    ggplot(aes(Clarity)) +
+    geom_bar(binwidth = 1, color = "black",fill = "lightgreen") +
+    labs(title = "Distribution of Carat") +
+    theme_minimal()
+summary(diamond$Clarity)
+```
+
+# Cut
+
+F: Fair  G: Good  I: Ideal  V: Very Good  X: Excellent
+
+Type x of cut is the most frequent among others which represent the excellent cut. The professor is going to buy a very good cut which is the second most frequent cut type. 
+
+```{r message = FALSE, echo = FALSE, warning = FALSE}
+diamond %>%
+    ggplot(aes(Cut)) +
+    geom_bar(binwidth = 1, color = "black",fill = "lightgreen") +
+    labs(title = "Distribution of Cut") +
+    theme_minimal()
+summary(diamond$Cut)
+```
+
+# Certification
+
+The mode of certification data is GIA and also the professor wants to buy a diamond ring with GIA certification. Like previous analysis, univariate investigation cannot help us to find the relationship between the price and type of certification.
+
+```{r message = FALSE, echo = FALSE, warning = FALSE}
+diamond %>%
+    ggplot(aes(Certification)) +
+    geom_bar(binwidth = 1, color = "black",fill = "lightgreen") +
+    labs(title = "Distribution of Carat") +
+    theme_minimal()
+summary(diamond$Certification)
+```
+
+# Polish
+
+F: Fair  G: Good  I: Ideal  V: Very Good  X: Excellent
+
+Polish classification is similar to the cut code. As can be seen in the bar chart, very good and good are the most nd second most ones. The professor ring has good polish that seems to be a good choice.
+```{r message = FALSE, echo = FALSE, warning = FALSE}
+diamond %>%
+    ggplot(aes(Polish)) +
+    geom_bar(binwidth = 1, color = "black",fill = "lightgreen") +
+    labs(title = "Distribution of Carat") +
+    theme_minimal()
+summary(diamond$Polish)
+```
+
+
+# Symmetry
+
+F: Fair  G: Good  I: Ideal  V: Very Good  X: Excellent
+
+Symmetry classification is also similar to the cut code and polish. Very good and good symmetry are popular. The professor choice is very good which the mode of the symmetry variable.
+```{r message = FALSE, echo = FALSE, warning = FALSE}
+diamond %>%
+    ggplot(aes(Symmetry)) +
+    geom_bar(binwidth = 1, color = "black",fill = "lightgreen") +
+    labs(title = "Distribution of Carat") +
+    theme_minimal()
+summary(diamond$Symmetry)
+```
+
+
+## Bivariate Analysis
+
+In this part of analysis, I am going to analyze the relationship between price and other metric or non-metric variable usinf regression model and plots. The correlation and covariance would also be analyzed. 
+
+# Price vs Carat
+The correlation between the price and the Carat is shown in the following figure and the linear regression model and coefficents are also calculated. For the professor choice that Carat is 0.9, the price $3100 seeems fair according to these analysis. The p-values are also significant that makes we sure that the linear regression model is reliable.
+
+```{r echo=FALSE, warning=FALSE}
+
+ggplot(diamond, aes(x = Carat, y = Price)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE, color = "#8E2C90") + 
+  labs(title = "Price vs Carat")
+```
+```{r echo=FALSE, warning=FALSE}
+linear_reg() %>%
+  set_engine("lm") %>%
+  fit(Price ~ Carat, data = diamond) %>%
+  tidy()
+
+```
+
+$$\widehat{Price}_{i} = 1339.88 + 19.82 \times Carat_{i}$$
+
+# Price vs Colour
+
+The correlation between the price and the Colour is shown in the following figure and the linear regression model and coefficents are also calculated. For the professor choice that Colour is J, we can see a range of price implyng that there is a need to more analysis on other variables using the multiple regression. The p-values for some colours are not significant significant showing that this model is not significant enough in overall.
+
+```{r echo=FALSE, warning=FALSE}
+
+ggplot(diamond, aes(x = Colour, y = Price)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE, color = "#8E2C90") + 
+  labs(title = "Price vs Colour")
+```
+```{r echo=FALSE, warning=FALSE}
+linear_reg() %>%
+  set_engine("lm") %>%
+  fit(Price ~ Colour, data = diamond) %>%
+  tidy()
+
+```
+
+# Price vs Clarity
+
+The analysis of price vs clarity also seems like the Colour one results. For instance, for the clarity of S12 which is the professor diamond ring choice, we can see a wide range of actual prices. This means that there are other variables affecting the price.
+
+```{r echo=FALSE, warning=FALSE}
+
+ggplot(diamond, aes(x = Clarity, y = Price)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE, color = "#8E2C90") + 
+  labs(title = "Price vs Clarity")
+```
+```{r echo=FALSE, warning=FALSE}
+linear_reg() %>%
+  set_engine("lm") %>%
+  fit(Price ~ Clarity, data = diamond) %>%
+  tidy()
+
+```
+
+# Price vs Cut
+
+The correlation between the price and the Cut is shown in the following figure and the linear regression model and coefficents are also calculated. We can see that coefficents of linear regression are significant although the plot shows the gap between the prices of each cut category. Therefore, we need more analysis.
+
+```{r echo=FALSE, warning=FALSE}
+
+ggplot(diamond, aes(x = Cut, y = Price)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE, color = "#8E2C90") + 
+  labs(title = "Price vs Cut")
+```
+```{r echo=FALSE, warning=FALSE}
+linear_reg() %>%
+  set_engine("lm") %>%
+  fit(Price ~ Cut, data = diamond) %>%
+  tidy()
+
+```
+
+# Price vs Certification
+
+The correlation between the price and the Certification is shown in the following figure and the linear regression model and coefficents are also calculated. For the professor choice which is GIA cetification, the coefficient of regression is reliable but the plot shows a wide range of price meaning tat other variables effect should be considered.
+
+```{r echo=FALSE, warning=FALSE}
+
+ggplot(diamond, aes(x = Certification, y = Price)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE, color = "#8E2C90") + 
+  labs(title = "Price vs Certification")
+```
+```{r echo=FALSE, warning=FALSE}
+linear_reg() %>%
+  set_engine("lm") %>%
+  fit(Price ~ Certification, data = diamond) %>%
+  tidy()
+
+```
+
+# Price vs Polish
+
+The correlation between the price and the Polish is shown in the following figure and the linear regression model and coefficents are also calculated. Most of the regression coefficients are insignificant. Moreover, for the professor choice, Good Polish, the coefficient is not significant.
+
+```{r echo=FALSE, warning=FALSE}
+
+ggplot(diamond, aes(x = Polish, y = Price)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE, color = "#8E2C90") + 
+  labs(title = "Price vs Polish")
+```
+```{r echo=FALSE, warning=FALSE}
+linear_reg() %>%
+  set_engine("lm") %>%
+  fit(Price ~ Polish, data = diamond) %>%
+  tidy()
+
+```
+
+
+# Price vs Symmetry
+
+The correlation between the price and the Polish is shown in the following figure and the linear regression model and coefficents are also calculated. Most of the regression coefficients are insignificant but the Symmetry V, which is the professor's diamond ring specification, we can see a significant coefficient. However, the plot shows a wide range of price meaning that effect of other variables should be considered.
+
+```{r echo=FALSE, warning=FALSE}
+
+ggplot(diamond, aes(x = Symmetry, y = Price)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE, color = "#8E2C90") + 
+  labs(title = "Price vs Symmetry")
+```
+```{r echo=FALSE, warning=FALSE}
+linear_reg() %>%
+  set_engine("lm") %>%
+  fit(Price ~ Symmetry, data = diamond) %>%
+  tidy()
+
+```
+
+## Multiple Regression Model
+
+In the previous section, we found that most of the variables coefficients are not significant. Therefore, we are going to investigate the multiple regression model to estimate the price of diamond ring precisely. The estimated price of the diamond ring is $2959.7 that is a little lower than $3100. 
+
+```{r echo=FALSE, warning=FALSE}
+
+linear_reg() %>%
+  set_engine("lm") %>%
+  fit(Price ~ Carat + Colour + Clarity + Cut + Certification + Polish + Symmetry, data = diamond) %>%
+  tidy()
+
+```
+$$\widehat{Price}_{i} = 1901.97 + 22.75 \times 90 - 295.49 \times 1 - 412.37 \times 1 + 584.78 \times 1 - 438.32 \times 1 - 428.37 \times 1 = 2959.7$$
+## Summary
+
+First, we build a univariate analysis of the metric and non-metric variables independently. We found that there is a need to evaluate the effect of other variables. Then, we analyze the bivariate of price vs all of the variables. Finally, the multiple regression model was biult to found our best estimation of the diamond ring for the professor. Our estimation is $2959.7 that is a little lower than $3100. The estimation shows that the ring worth $140 lower than the suggested price.
+
